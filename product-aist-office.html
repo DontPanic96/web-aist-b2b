@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <title>AiST Office | Персональный AI‑ассистент для сотрудников</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AiST Office — персональный AI‑ассистент для сотрудников. Автоматизируйте до 65% рутинных задач, освободите 2–3 часа в день каждому сотруднику и сократите операционные издержки до 40%." />
+    <meta name="keywords" content="AiST Office, AI-ассистент, автоматизация рутинных задач, b2b, документооборот, рекрутинг, продажи, российский ИИ, 152-ФЗ" />
+    <meta name="author" content="AiST">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Theme switcher (color modes) -->
+    <script src="assets/js/theme-switcher.js"></script>
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#6366f1">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css">
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css">
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      [data-bs-theme="dark"] .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      [data-bs-theme="dark"] .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      [data-bs-theme="dark"] .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1000);
+        };
+      })();
+    </script>
+
+  </head>
+
+
+  <!-- Body -->
+  <body>
+    
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+
+
+    <!-- Page wrapper for sticky footer -->
+    <main class="page-wrapper">
+
+
+      <!-- Navbar -->
+      <header class="header navbar navbar-expand-lg position-absolute navbar-sticky">
+        <div class="container px-3">
+          <a href="index.html" class="navbar-brand pe-3">
+            <img src="assets/img/logo.svg" width="47" alt="AiST">
+            AiST Office
+          </a>
+          <div id="navbarNav" class="offcanvas offcanvas-end">
+            <div class="offcanvas-header border-bottom">
+              <h5 class="offcanvas-title">Меню</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a href="#top" class="nav-link active" aria-current="page">Продукт</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#features" class="nav-link">Возможности</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#how-it-works" class="nav-link">Как это работает</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#pricing" class="nav-link">Тарифы</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#faq" class="nav-link">FAQ</a>
+                </li>
+              </ul>
+            </div>
+            <div class="offcanvas-header border-top">
+              <a href="#cta" class="btn btn-primary w-100">
+                <i class="bx bx-calendar-event fs-4 lh-1 me-1"></i>
+                &nbsp;Записаться на демо
+              </a>
+            </div>      
+          </div>
+          <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
+            <input type="checkbox" class="form-check-input" id="theme-mode">
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Светлая</label>
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Темная</label>
+          </div>
+          <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a href="#cta" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex">
+            <i class="bx bx-calendar-event fs-5 lh-1 me-1"></i>
+            &nbsp;Записаться на демо
+          </a>
+        </div>
+      </header>
+
+
+      <!-- Hero -->
+      <section id="top" class="overflow-hidden pt-5" style="background: radial-gradient(116.18% 118% at 50% 100%, rgba(99, 102, 241, 0.1) 0%, rgba(218, 70, 239, 0.05) 41.83%, rgba(241, 244, 253, 0.07) 82.52%);">
+        <div class="container pt-3 pt-sm-4 pt-xl-5">
+          <div class="row pt-md-2 pt-lg-5">
+            <div class="col-md-5 d-flex flex-column mt-md-4 pt-5 pb-3 pb-sm-4 py-md-5">
+              <h1 class="display-4 text-center text-md-start mb-4">
+                AiST Office — персональный AI‑ассистент для вашей команды
+              </h1>
+              <p class="fs-lg text-center text-md-start pb-2 pb-md-3 mb-4 mb-lg-5">
+                Автоматизируйте до 65% рутинных задач, освободите 2–3 часа в день каждому сотруднику и увеличьте производительность отделов до 60% без найма новых людей.
+              </p>
+              <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-md-start">
+                <a href="#cta" class="btn btn-primary btn-lg px-4 me-sm-3 me-lg-4 mb-3">
+                  Записаться на демо
+                </a>
+                <a href="#pricing" class="btn btn-outline-secondary btn-lg px-4 mb-3">
+                  Рассчитать экономию
+                </a>
+              </div>
+              <div class="position-relative d-inline-flex align-items-center justify-content-center justify-content-md-start mt-auto pt-3 pt-md-4 pb-xl-2">
+                <a href="#features" class="btn btn-icon btn-light bg-white stretched-link rounded-circle me-3" data-scroll data-scroll-offset="120" aria-label="Scroll for more">
+                  <i class="bx bx-chevron-down"></i>
+                </a>
+                <span class="fs-sm">Узнайте, как AiST Office работает в вашей компании</span>
+              </div>     
+            </div>
+            <div class="col-md-7 align-self-end">
+              <div class="position-relative overflow-hidden mt-4 pb-3 pt-4 mx-auto me-md-0" style="max-width: 632px;">
+                <div class="ratio ratio-1x1"></div>
+                <img src="assets/img/landing/app-showcase-1/hero-phone-1.png" class="rellax position-absolute top-0 start-0 zindex-2"  data-rellax-speed="1.6" data-disable-parallax-down="md" alt="Phone">
+                <img src="assets/img/landing/app-showcase-1/hero-phone-2.png" class="rellax position-absolute top-0 start-0"  data-rellax-speed="2.8" data-disable-parallax-down="md" alt="Phone">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Industries / Brands -->
+      <section class="container py-5 mt-md-2 mt-lg-4">
+        <div class="swiper industries-swiper pt-2 mx-n2" data-swiper-options='{
+          "slidesPerView": 2,
+          "pagination": {
+            "el": ".industries-pagination",
+            "clickable": true
+          },
+          "breakpoints": {
+            "500": {
+              "slidesPerView": 3,
+              "spaceBetween": 8
+            },
+            "650": {
+              "slidesPerView": 4,
+              "spaceBetween": 8
+            },
+            "900": {
+              "slidesPerView": 5,
+              "spaceBetween": 8
+            },
+            "1100": {
+              "slidesPerView": 6,
+              "spaceBetween": 8
+            }
+          }
+        }'>
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide py-3">
+              <div class="card card-body card-hover px-2 mx-2 text-center">
+                <span class="fs-sm fw-semibold text-muted">Финансы</span>
+              </div>
+            </div>
+
+            <div class="swiper-slide py-3">
+              <div class="card card-body card-hover px-2 mx-2 text-center">
+                <span class="fs-sm fw-semibold text-muted">Ритейл и e‑commerce</span>
+              </div>
+            </div>
+
+            <div class="swiper-slide py-3">
+              <div class="card card-body card-hover px-2 mx-2 text-center">
+                <span class="fs-sm fw-semibold text-muted">HR‑службы и рекрутинг</span>
+              </div>
+            </div>
+
+            <div class="swiper-slide py-3">
+              <div class="card card-body card-hover px-2 mx-2 text-center">
+                <span class="fs-sm fw-semibold text-muted">Продажи и сервис</span>
+              </div>
+            </div>
+
+            <div class="swiper-slide py-3">
+              <div class="card card-body card-hover px-2 mx-2 text-center">
+                <span class="fs-sm fw-semibold text-muted">Медицина</span>
+              </div>
+            </div>
+
+            <div class="swiper-slide py-3">
+              <div class="card card-body card-hover px-2 mx-2 text-center">
+                <span class="fs-sm fw-semibold text-muted">Образование и курсы</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-pagination industries-pagination position-relative pt-2 mt-4"></div>
+        </div>
+      </section>
+
+
+      <!-- Features -->
+      <section id="features" class="container pt-lg-2 pt-xl-3 pb-3 pb-xl-5 mt-n2 mt-sm-0 mb-2 mb-md-4 mb-lg-5">
+        <div class="row pb-xl-3">
+
+          <!-- Parallax gfx -->
+          <div class="col-lg-5 d-none d-lg-block">
+            <div class="position-relative" style="max-width: 348px;">
+              <img src="assets/img/landing/app-showcase-1/features/phone.png" alt="Phone">
+              <div class="rellax position-absolute top-0" data-rellax-vertical-scroll-axis="x" data-rellax-horizontal-speed="0.75" data-disable-parallax-down="lg" style="max-width: 348px; right: -2.75rem;">
+                <img src="assets/img/landing/app-showcase-1/features/card.png" alt="Card">
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature list -->
+          <div class="col-lg-7">
+            <h2 class="h1 text-center text-md-start mb-4">Ключевые возможности AiST Office</h2>
+            <p class="fs-lg text-muted text-center text-md-start mb-4 mb-xl-5">
+              AiST Office — это персональный AI‑ассистент для сотрудников. Он помогает автоматизировать документооборот, рекрутинг, продажи, маркетинг и клиентскую поддержку, работая по вашим правилам и корпоративным регламентам.
+            </p>
+            <div class="row row-cols-1 row-cols-sm-2 pt-2 pt-sm-3 pt-xl-2">
+
+              <div class="col pb-2 pb-xl-0 mb-4 mb-xl-5">
+                <div class="d-flex align-items-start pe-xl-3">
+                  <div class="d-table bg-secondary rounded-3 flex-shrink-0 p-3 mb-3">
+                    <img src="assets/img/landing/app-showcase-1/features/payments.svg" alt="Icon">
+                  </div>
+                  <div class="ps-4 ps-sm-3 ps-md-4">
+                    <h3 class="h5 pb-1 mb-2">Автоматизация документооборота</h3>
+                    <p class="mb-0">Классификация входящих писем и документов, извлечение данных, подготовка черновиков ответов и маршрутизация по отделам.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col pb-2 pb-xl-0 mb-4 mb-xl-5">
+                <div class="d-flex align-items-start ps-xl-3">
+                  <div class="d-table bg-secondary rounded-3 flex-shrink-0 p-3 mb-3">
+                    <img src="assets/img/landing/app-showcase-1/features/statistics.svg" alt="Icon">
+                  </div>
+                  <div class="ps-4 ps-sm-3 ps-md-4">
+                    <h3 class="h5 pb-1 mb-2">Ускорение рекрутинга</h3>
+                    <p class="mb-0">Автоматический разбор резюме, скоринг кандидатов, подготовка описаний вакансий и персонализированных писем соискателям.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col pb-2 pb-xl-0 mb-4 mb-xl-5">
+                <div class="d-flex align-items-start pe-xl-3">
+                  <div class="d-table bg-secondary rounded-3 flex-shrink-0 p-3 mb-3">
+                    <img src="assets/img/landing/app-showcase-1/features/cashback.svg" alt="Icon">
+                  </div>
+                  <div class="ps-4 ps-sm-3 ps-md-4">
+                    <h3 class="h5 pb-1 mb-2">Помощь в продажах</h3>
+                    <p class="mb-0">Обработка заявок, подготовка коммерческих предложений, контроль заказов и обновление статусов в CRM‑системе.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col pb-2 pb-xl-0 mb-4 mb-xl-5">
+                <div class="d-flex align-items-start ps-xl-3">
+                  <div class="d-table bg-secondary rounded-3 flex-shrink-0 p-3 mb-3">
+                    <img src="assets/img/landing/app-showcase-1/features/happy.svg" alt="Icon">
+                  </div>
+                  <div class="ps-4 ps-sm-3 ps-md-4">
+                    <h3 class="h5 pb-1 mb-2">AI для маркетинга</h3>
+                    <p class="mb-0">Генерация писем, постов, лендингов и презентаций с учетом вашего тона бренда и целевой аудитории.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col pb-2 pb-xl-0 mb-4 mb-xl-5">
+                <div class="d-flex align-items-start pe-xl-3">
+                  <div class="d-table bg-secondary rounded-3 flex-shrink-0 p-3 mb-3">
+                    <img src="assets/img/landing/app-showcase-1/features/security.svg" alt="Icon">
+                  </div>
+                  <div class="ps-4 ps-sm-3 ps-md-4">
+                    <h3 class="h5 pb-1 mb-2">Юридическая поддержка</h3>
+                    <p class="mb-0">Анализ договоров, поиск рисков, сравнение с шаблонами и подготовка кратких резюме по ключевым условиям.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col pb-2 pb-xl-0 mb-4 mb-xl-5">
+                <div class="d-flex align-items-start ps-xl-3">
+                  <div class="d-table bg-secondary rounded-3 flex-shrink-0 p-3 mb-3">
+                    <img src="assets/img/landing/app-showcase-1/features/support.svg" alt="Icon">
+                  </div>
+                  <div class="ps-4 ps-sm-3 ps-md-4">
+                    <h3 class="h5 pb-1 mb-2">Интеграции и безопасность</h3>
+                    <p class="mb-0">Работа в российской инфраструктуре, соответствие 152‑ФЗ, интеграции с CRM, ERP, HR‑системами и внешними сервисами (например, hh.ru).</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- How it works (Slider) -->
+      <section id="how-it-works" class="position-relative bg-secondary py-5">
+        <div class="container mt-3 pt-md-2 pt-lg-4 pb-2 pb-md-4 pb-lg-5">
+          <h2 class="h1 text-center pb-2 pb-md-0 mb-4 mb-md-5">Как AiST Office работает в вашей компании</h2>
+          <div class="position-relative mx-5">
+
+            <button type="button" id="prev-screen" class="btn btn-prev btn-icon position-absolute top-50 start-0 ms-n5 translate-middle-y" aria-label="Previous">
+              <i class="bx bx-chevron-left"></i>
+            </button>
+            <button type="button" id="next-screen" class="btn btn-next btn-icon position-absolute top-50 end-0 me-n5 translate-middle-y" aria-label="Next">
+              <i class="bx bx-chevron-right"></i>
+            </button>
+
+            <div class="position-absolute top-0 start-50 translate-middle-x h-100 w-100 w-md-33 zindex-5">
+              <div class="d-flex bg-repeat-0 bg-size-cover w-100 h-100 mx-auto" style="max-width: 328px; background-image: url(assets/img/landing/app-showcase-1/screens/phone-frame.png);"></div>
+            </div>
+
+            <div class="position-absolute top-0 start-50 translate-middle-x h-100 w-100 w-md-33">
+              <div class="d-flex bg-repeat-0 bg-size-cover w-100 h-100 mx-auto" style="max-width: 328px; background-image: url(assets/img/landing/app-showcase-1/screens/phone-screen.png);"></div>
+            </div>
+
+            <div class="swiper mobile-app-slider" data-swiper-options='{
+              "slidesPerView": 1,
+              "centeredSlides": true,
+              "loop": true,
+              "tabs": true,
+              "pagination": {
+                "el": "#swiper-progress",
+                "type": "progressbar"
+              },
+              "navigation": {
+                "prevEl": "#prev-screen",
+                "nextEl": "#next-screen"
+              },
+              "breakpoints": {
+                "768": { "slidesPerView": 3 }
+              }
+            }'>
+              <div class="swiper-wrapper">
+
+                <div class="swiper-slide" data-swiper-tab="#text-1">
+                  <img src="assets/img/landing/app-showcase-1/screens/01.png" class="d-block mx-auto" width="328" alt="Screen">
+                </div>
+
+                <div class="swiper-slide" data-swiper-tab="#text-2">
+                  <img src="assets/img/landing/app-showcase-1/screens/02.png" class="d-block mx-auto" width="328" alt="Screen">
+                </div>
+
+                <div class="swiper-slide" data-swiper-tab="#text-3">
+                  <img src="assets/img/landing/app-showcase-1/screens/03.png" class="d-block mx-auto" width="328" alt="Screen">
+                </div>
+
+                <div class="swiper-slide" data-swiper-tab="#text-4">
+                  <img src="assets/img/landing/app-showcase-1/screens/04.png" class="d-block mx-auto" width="328" alt="Screen">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row justify-content-center pt-4 mt-2 mt-md-3">
+            <div class="swiper-tabs col-xl-6 col-lg-7 col-md-8 text-center">
+
+              <div id="text-1" class="swiper-tab active">
+                <h3 class="h4 pb-1 mb-2">Шаг 1. Определяем задачи и сценарии</h3>
+                <p class="mb-0">Вместе с вашей командой выбираем процессы: обработка писем и документов, рекрутинг, продажи, поддержка, маркетинг. Формируем набор типовых сценариев и требований к безопасности.</p>
+              </div>
+
+              <div id="text-2" class="swiper-tab">
+                <h3 class="h4 pb-1 mb-2">Шаг 2. Настраиваем ассистентов под ваш бизнес</h3>
+                <p class="mb-0">Создаем AI‑ассистентов под конкретные роли: рекрутер, менеджер по продажам, маркетолог, юрист. Загружаем шаблоны документов, скрипты, регламенты и подключаем корпоративные системы.</p>
+              </div>
+
+              <div id="text-3" class="swiper-tab">
+                <h3 class="h4 pb-1 mb-2">Шаг 3. Запускаем пилот и измеряем эффект</h3>
+                <p class="mb-0">Подключаем ограниченное количество пользователей, фиксируем текущие метрики (время обработки задач, количество ошибок, объем обработанных заявок) и сравниваем результаты после запуска AiST Office.</p>
+              </div>
+
+              <div id="text-4" class="swiper-tab">
+                <h3 class="h4 pb-1 mb-2">Шаг 4. Масштабируем на отделы и всю компанию</h3>
+                <p class="mb-0">Расширяем количество пользователей, добавляем новые сценарии и интеграции. Вы получаете предсказуемый экономический эффект и понятный ROI.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="swiper-progress" class="swiper-pagination bottom-0" style="top: auto;"></div>
+      </section>
+
+
+      <!-- Business effect & Security -->
+      <section class="container pt-5 pb-2 pb-md-3 py-lg-5">
+        <div class="row align-items-center my-3 py-md-3 py-lg-5">
+          <div class="col-md-6 col-xl-5 offset-lg-1 offset-xl-2 order-md-2 mb-2 mb-md-0 pb-4 pb-md-0">
+            <div class="position-relative mx-auto mx-md-0" style="max-width: 469px;">
+              <img src="assets/img/landing/app-showcase-1/features/screen01.png" class="rellax d-block" alt="Screen" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+              <div class="rellax position-absolute top-0 end-0 w-100 h-100" data-rellax-percentage="0.5" data-rellax-speed="0.75" data-disable-parallax-down="md">
+                <img src="assets/img/landing/app-showcase-1/features/screen02.png" alt="Screen">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-5 col-xl-4 offset-xl-1 order-md-1 pb-md-4">
+            <h2 class="pb-3">Экономический эффект от внедрения AiST Office</h2>
+            <ul class="list-unstyled pb-3 mb-3">
+              <li class="d-flex align-items-center mb-2">
+                <i class="bx bx-check-circle fs-xl text-primary me-2"></i>
+                Экономия до 2–3 часов в день на одного сотрудника за счет автоматизации рутины.
+              </li>
+              <li class="d-flex align-items-center mb-2">
+                <i class="bx bx-check-circle fs-xl text-primary me-2"></i>
+                Рост производительности отделов до 60% без увеличения штата.
+              </li>
+              <li class="d-flex align-items-center mb-2">
+                <i class="bx bx-check-circle fs-xl text-primary me-2"></i>
+                Сокращение времени обработки документов и заявок в 2,5–3 раза при сохранении качества.
+              </li>
+            </ul>
+            <a href="#pricing" class="btn btn-primary">
+              Посмотреть тарифы
+              <i class="bx bx-right-arrow-alt fs-xl ms-2 me-n1"></i>
+            </a>
+          </div>
+        </div>
+        <div class="row align-items-center mt-2 mt-md-0 pt-5 pt-md-4 pt-lg-0 pb-md-3 pb-lg-5">
+          <div class="col-md-6 col-lg-5 offset-xl-1 mb-2 mb-md-0 pb-4 pb-md-0">
+            <div class="position-relative mx-auto mx-md-0" style="max-width: 462px;">
+              <img src="assets/img/landing/app-showcase-1/features/screen03.png" class="rellax d-block" alt="Screen" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+              <div class="rellax position-absolute top-0 end-0 w-100 h-100 me-md-n3" data-rellax-percentage="0.5" data-rellax-speed="0.75" data-disable-parallax-down="md">
+                <img src="assets/img/landing/app-showcase-1/features/screen04.png" alt="Screen">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-5 offset-lg-1">
+            <h2 class="pb-3">Интеграция и безопасность корпоративного уровня</h2>
+            <div class="row row-cols-1 row-cols-sm-2 text-start pb-3">
+              <div class="col pb-4">
+                <div class="d-table bg-secondary rounded-3 flex-shrink-0 p-3 mb-3">
+                  <img src="assets/img/landing/app-showcase-1/features/security.svg" alt="Безопасность данных">
+                </div>
+                <p class="mb-0">
+                  Размещение в российской инфраструктуре, соответствие 152‑ФЗ и корпоративным требованиям по защите данных. Возможность работы в изолированной среде.
+                </p>
+              </div>
+              <div class="col pb-4">
+                <div class="d-table bg-secondary rounded-3 flex-shrink-0 p-3 mb-3">
+                  <img src="assets/img/landing/app-showcase-1/features/payments.svg" alt="Интеграции">
+                </div>
+                <p class="mb-0">
+                  Интеграция с CRM, ERP, HR‑системами и внешними сервисами (например, hh.ru) для сквозной автоматизации процессов и минимизации ручного ввода данных.
+                </p>
+              </div>
+            </div>
+            <a href="#cta" class="btn btn-primary">
+              Обсудить интеграцию
+              <i class="bx bx-right-arrow-alt fs-xl ms-2 me-n1"></i>
+            </a>
+          </div>
+        </div>
+        <div class="pt-5 d-none d-dark-mode-block"></div>
+      </section>
+
+
+      <!-- Testimonials / Cases -->
+      <section class="py-5 mb-md-2" style="background: radial-gradient(116.18% 118% at 50% 100%, rgba(99, 102, 241, 0.1) 0%, rgba(218, 70, 239, 0.05) 41.83%, rgba(241, 244, 253, 0.07) 82.52%);">
+        <div class="container py-lg-4">
+          <div class="row py-md-3">
+            <div class="col-xl-3 col-lg-4 pt-2">
+              <h2 class="h1 text-center text-lg-start pb-2">Кейсы внедрения AiST Office</h2>
+              
+              <div class="d-flex justify-content-center justify-content-lg-start pt-lg-5">
+                <button type="button" id="prev-review" class="btn btn-prev btn-icon btn-sm me-3" aria-label="Previous">
+                  <i class="bx bx-chevron-left"></i>
+                </button>
+                <button type="button" id="next-review" class="btn btn-next btn-icon btn-sm" aria-label="Next">
+                  <i class="bx bx-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-8 offset-xl-1 pt-4 mt-2 mt-md-3 mt-lg-0 pt-lg-0">
+              <div class="px-2 px-sm-0">
+                <div class="swiper testimonials-swiper mx-n2" data-swiper-options='{
+                  "slidesPerView": 1,
+                  "spaceBetween": 8,
+                  "navigation": {
+                    "prevEl": "#prev-review",
+                    "nextEl": "#next-review"
+                  },
+                  "loop": true,
+                  "breakpoints": {
+                    "600": { "slidesPerView": 2 }
+                  }
+                }'>
+                  <div class="swiper-wrapper">
+      
+                    <div class="swiper-slide h-auto pt-4 pb-3 px-2">
+                      <div class="d-flex flex-column h-100 px-2 px-sm-0 mb-0">
+                        <div class="card h-100 position-relative border-0 shadow-sm pt-4">
+                          <span class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4">
+                            <i class="bx bxs-quote-left"></i>
+                          </span>
+                          <blockquote class="card-body pb-4 mb-0">
+                            <div class="text-nowrap pt-1 mb-3">
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                            </div>
+                            <p class="fs-lg mb-0">
+                              Мы автоматизировали до 65% задач рекрутинга: AiST Office сам разбирает резюме, делает скоринг кандидатов, готовит тексты вакансий и писем соискателям. Команда обрабатывает на 60% больше резюме и закрывает вакансии быстрее без найма дополнительных рекрутеров.
+                            </p>
+                          </blockquote>
+                          <div class="card-footer d-flex align-items-center border-0 pt-0">
+                            <img src="assets/img/avatar/42.png" width="48" class="rounded-circle ms-n1" alt="HR lead">
+                            <div class="ps-2 ms-1">
+                              <h6 class="fs-base fw-semibold mb-0">Руководитель отдела подбора персонала</h6>
+                              <span class="fs-sm text-muted">Средняя компания, 800+ сотрудников</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="swiper-slide h-auto pb-3 px-2 pt-4">
+                      <div class="d-flex flex-column h-100 px-2 px-sm-0 mb-0">
+                        <div class="card h-100 position-relative border-0 shadow-sm pt-4">
+                          <span class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4">
+                            <i class="bx bxs-quote-left"></i>
+                          </span>
+                          <blockquote class="card-body pb-4 mb-0">
+                            <div class="text-nowrap pt-1 mb-3">
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                            </div>
+                            <p class="fs-lg mb-0">
+                              Менеджеры по продажам сократили время обработки заявки на 40%. AiST Office помогает готовить коммерческие предложения, проверять заказы и обновлять данные в CRM. Ошибок в заказах стало на 25% меньше, а клиенты получают ответы значительно быстрее.
+                            </p>
+                          </blockquote>
+                          <div class="card-footer d-flex align-items-center border-0 pt-0">
+                            <img src="assets/img/avatar/43.png" width="48" class="rounded-circle ms-n1" alt="Sales lead">
+                            <div class="ps-2 ms-1">
+                              <h6 class="fs-base fw-semibold mb-0">Коммерческий директор</h6>
+                              <span class="fs-sm text-muted">B2B‑сервисная компания</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="swiper-slide h-auto pb-3 px-2 pt-4">
+                      <div class="d-flex flex-column h-100 px-2 px-sm-0 mb-0">
+                        <div class="card h-100 position-relative border-0 shadow-sm pt-4">
+                          <span class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4">
+                            <i class="bx bxs-quote-left"></i>
+                          </span>
+                          <blockquote class="card-body pb-4 mb-0">
+                            <div class="text-nowrap pt-1 mb-3">
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                            </div>
+                            <p class="fs-lg mb-0">
+                              Юридический отдел использует AiST Office для первичного анализа договоров и подготовки резюме по ключевым условиям. Время проверки типового контракта сократилось в 2,5 раза при сохранении качества анализа.
+                            </p>
+                          </blockquote>
+                          <div class="card-footer d-flex align-items-center border-0 pt-0">
+                            <img src="assets/img/avatar/44.png" width="48" class="rounded-circle ms-n1" alt="Legal lead">
+                            <div class="ps-2 ms-1">
+                              <h6 class="fs-base fw-semibold mb-0">Руководитель юридического отдела</h6>
+                              <span class="fs-sm text-muted">Крупная торговая компания</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="swiper-slide h-auto pb-3 px-2 pt-4">
+                      <div class="d-flex flex-column h-100 px-2 px-sm-0 mb-0">
+                        <div class="card h-100 position-relative border-0 shadow-sm pt-4">
+                          <span class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4">
+                            <i class="bx bxs-quote-left"></i>
+                          </span>
+                          <blockquote class="card-body pb-4 mb-0">
+                            <div class="text-nowrap pt-1 mb-3">
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                              <i class="bx bxs-star text-warning"></i>
+                            </div>
+                            <p class="fs-lg mb-0">
+                              В телемедицине AiST Office помогает расшифровывать аудио‑ и видеоконсультации, структурировать жалобы и формировать черновики заключений. Врачи тратят меньше времени на оформление документов и больше — на работу с пациентами.
+                            </p>
+                          </blockquote>
+                          <div class="card-footer d-flex align-items-center border-0 pt-0">
+                            <img src="assets/img/avatar/45.png" width="48" class="rounded-circle ms-n1" alt="Medical lead">
+                            <div class="ps-2 ms-1">
+                              <h6 class="fs-base fw-semibold mb-0">Руководитель телемедицинского центра</h6>
+                              <span class="fs-sm text-muted">Медицинская сеть</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Pricing -->
+      <section id="pricing" class="container py-5 mb-lg-2">
+        <div class="row py-2 py-md-4 py-lg-5">
+          <div class="col-12 text-center pb-4">
+            <h2 class="h1 mb-3">Тарифы AiST Office</h2>
+            <p class="fs-lg text-muted mb-0">
+              Выберите тариф под размер вашей команды. Годовая подписка позволяет сэкономить до 18% по сравнению с помесячной оплатой.
+            </p>
+          </div>
+          <div class="col-12">
+            <div class="row row-cols-1 row-cols-md-3 g-4 pt-3">
+
+              <!-- Start -->
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                  <div class="card-body d-flex flex-column">
+                    <h3 class="h5 mb-2">Start</h3>
+                    <p class="text-muted mb-3">До 50 пользователей. Базовый набор функций для небольших команд и отделов.</p>
+                    <ul class="list-unstyled mb-4">
+                      <li class="d-flex mb-2">
+                        <i class="bx bx-check text-primary me-2"></i>
+                        <span>Все базовые AI‑ассистенты (документы, письма, контент)</span>
+                      </li>
+                      <li class="d-flex mb-2">
+                        <i class="bx bx-check text-primary me-2"></i>
+                        <span>Доступ к российской облачной инфраструктуре</span>
+                      </li>
+                      <li class="d-flex mb-2">
+                        <i class="bx bx-check text-primary me-2"></i>
+                        <span>Стандартная техническая поддержка</span>
+                      </li>
+                    </ul>
+                    <div class="mt-auto">
+                      <p class="mb-1"><strong>1 месяц:</strong> 1&nbsp;990 ₽/польз.</p>
+                      <p class="mb-1"><strong>3 месяца:</strong> 2&nbsp;460 ₽ (820 ₽/мес/польз.)</p>
+                      <p class="mb-3"><strong>12 месяцев:</strong> 8&nbsp;760 ₽ (730 ₽/мес/польз.)</p>
+                      <a href="#cta" class="btn btn-outline-primary w-100">Выбрать Economy</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bussines -->
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm position-relative">
+                  <span class="badge bg-primary position-absolute top-0 end-0 mt-3 me-3">Популярный</span>
+                  <div class="card-body d-flex flex-column">
+                    <h3 class="h5 mb-2">Bussines</h3>
+                    <p class="text-muted mb-3">До 30 пользователей. Расширенные возможности и поддержка для отделов.</p>
+                    <ul class="list-unstyled mb-4">
+                      <li class="d-flex mb-2">
+                        <i class="bx bx-check text-primary me-2"></i>
+                        <span>Все функции Economy</span>
+                      </li>
+                      <li class="d-flex mb-2">
+                        <i class="bx bx-check text-primary me-2"></i>
+                        <span>Расширенные интеграции с CRM / ERP / HR</span>
+                      </li>
+                      <li class="d-flex mb-2">
+                        <i class="bx bx-check text-primary me-2"></i>
+                        <span>Приоритетная техническая поддержка</span>
+                      </li>
+                    </ul>
+                    <div class="mt-auto">
+                      <p class="mb-1"><strong>1 месяц:</strong> 2&nbsp;400 ₽/польз.</p>
+                      <p class="mb-1"><strong>3 месяца:</strong> 5&nbsp;490 ₽ (1&nbsp;830 ₽/мес/польз.)</p>
+                      <p class="mb-3"><strong>12 месяцев:</strong> 19&nbsp;580 ₽ (1&nbsp;632 ₽/мес/польз.)</p>
+                      <a href="#cta" class="btn btn-primary w-100">Выбрать Standard</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Enterprice -->
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                  <div class="card-body d-flex flex-column">
+                    <h3 class="h5 mb-2">Enterpric</h3>
+                    <p class="text-muted mb-3">До 10 пользователей. Максимум возможностей и персонализации для ключевых сотрудников.</p>
+                    <ul class="list-unstyled mb-4">
+                      <li class="d-flex mb-2">
+                        <i class="bx bx-check text-primary me-2"></i>
+                        <span>Все функции Standard</span>
+                      </li>
+                      <li class="d-flex mb-2">
+                        <i class="bx bx-check text-primary me-2"></i>
+                        <span>Индивидуальная настройка ассистентов под процессы компании</span>
+                      </li>
+                      <li class="d-flex mb-2">
+                        <i class="bx bx-check text-primary me-2"></i>
+                        <span>Выделенная команда сопровождения и обучение</span>
+                      </li>
+                    </ul>
+                    <div class="mt-auto">
+                      <p class="mb-1"><strong>1 месяц:</strong> 3&nbsp;000 ₽/польз.</p>
+                      <p class="mb-1"><strong>3 месяца:</strong> 8&nbsp;670 ₽ (2&nbsp;890 ₽/мес/польз.)</p>
+                      <p class="mb-3"><strong>12 месяцев:</strong> 29&nbsp;520 ₽ (2&nbsp;460 ₽/мес/польз.)</p>
+                      <a href="#cta" class="btn btn-outline-primary w-100">Выбрать Premium</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- FAQ -->
+      <section id="faq" class="container py-5 mb-lg-2">
+        <div class="row py-2 py-md-4 py-lg-5">
+          <div class="col-xl-4 col-md-5 text-center text-md-start pt-md-2 pb-2 pb-md-0 mb-4 mb-md-0">
+            <h2 class="pb-3 mb-1 mb-lg-3">Частые вопросы об AiST Office</h2>
+            <p class="fs-lg pb-3 mb-2 mb-lg-3">Если вы не нашли ответ — оставьте заявку, и мы подскажем, как AiST Office впишется в ваши процессы.</p>
+            <div class="row row-cols-1 row-cols-sm-2 g-3 g-sm-4">
+              <div class="col">
+                <div class="card card-hover">
+                  <div class="card-body pb-3">
+                    <i class="bx bxs-phone-call d-block fs-2 text-primary mb-2 py-1"></i>
+                    <p class="fs-sm mb-2">Нужна консультация?</p>
+                    <a href="#cta" class="btn btn-link stretched-link px-0">
+                      Оставить заявку
+                      <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card card-hover">
+                  <div class="card-body pb-3">
+                    <i class="bx bx-message-rounded-dots d-block fs-2 text-success mb-2 py-1"></i>
+                    <p class="fs-sm mb-2">Хотите живой показ?</p>
+                    <a href="#cta" class="btn btn-link text-success stretched-link px-0">
+                      Заказать демо
+                      <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7 offset-xl-1">
+            <div class="accordion" id="faq">
+              <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
+                <h2 class="accordion-header" id="q1-heading">
+                  <button class="accordion-button shadow-none rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#q1" aria-expanded="true" aria-controls="q1">
+                    Как быстро можно запустить AiST Office в компании?
+                  </button>
+                </h2>
+                <div id="q1" class="accordion-collapse collapse show" aria-labelledby="q1-heading" data-bs-parent="#faq">
+                  <div class="accordion-body fs-sm pt-0">
+                    <p>Пилотный запуск для одного отдела обычно занимает от 1 до 2 недель. За это время мы вместе определяем приоритетные сценарии, настраиваем ассистентов и подключаем необходимые системы.</p>
+                    <p class="mb-0">Полномасштабное внедрение по нескольким подразделениям зависит от количества процессов и интеграций, но в большинстве случаев занимает от 1 до 2 месяцев.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
+                <h2 class="accordion-header" id="q2-heading">
+                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2" aria-expanded="false" aria-controls="q2">
+                    Насколько безопасно использовать AiST Office с корпоративными данными?
+                  </button>
+                </h2>
+                <div id="q2" class="accordion-collapse collapse" aria-labelledby="q2-heading" data-bs-parent="#faq">
+                  <div class="accordion-body fs-sm pt-0">
+                    <p>AiST Office разворачивается в российской инфраструктуре и соответствует требованиям 152‑ФЗ по защите персональных данных. Возможны варианты размещения в облаке или на ваших серверах.</p>
+                    <p class="mb-0">Доступ к данным строго разграничивается ролями, а вся передача информации шифруется. Мы дополнительно учитываем ваши внутренние регламенты безопасности.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
+                <h2 class="accordion-header" id="q3-heading">
+                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3" aria-expanded="false" aria-controls="q3">
+                    Чем AiST Office отличается от обычного чат‑бота с LLM?
+                  </button>
+                </h2>
+                <div id="q3" class="accordion-collapse collapse" aria-labelledby="q3-heading" data-bs-parent="#faq">
+                  <div class="accordion-body fs-sm pt-0">
+                    <p>AiST Office — это не просто доступ к языковой модели. Это набор готовых бизнес‑ассистентов, которые работают по вашим регламентам, интегрированы с внутренними системами и дают предсказуемый результат.</p>
+                    <p class="mb-0">Мы настраиваем роли (рекрутер, юрист, менеджер по продажам, маркетолог и др.), подгружаем шаблоны, скрипты и ограничиваем поведение ассистента в рамках бизнес‑логики.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
+                <h2 class="accordion-header" id="q4-heading">
+                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4" aria-expanded="false" aria-controls="q4">
+                    Нужно ли обучать сотрудников работе с AiST Office?
+                  </button>
+                </h2>
+                <div id="q4" class="accordion-collapse collapse" aria-labelledby="q4-heading" data-bs-parent="#faq">
+                  <div class="accordion-body fs-sm pt-0">
+                    <p>Интерфейс AiST Office максимально приближен к привычным чат‑сервисам, поэтому базовое освоение занимает считанные часы.</p>
+                    <p class="mb-0">В тарифах Standard и Premium мы проводим обучающие сессии для команд, готовим инструкции и помогаем внедрить ассистентов в ежедневную работу.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 rounded-3 shadow-sm mb-3">
+                <h2 class="accordion-header" id="q5-heading">
+                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5" aria-expanded="false" aria-controls="q5">
+                    Можно ли начать с пилотного проекта на одном отделе?
+                  </button>
+                </h2>
+                <div id="q5" class="accordion-collapse collapse" aria-labelledby="q5-heading" data-bs-parent="#faq">
+                  <div class="accordion-body fs-sm pt-0">
+                    <p>Да, это рекомендуемый сценарий. Мы запускаем пилот на одном отделе (например, HR, продажи или поддержка), фиксируем стартовые метрики и оцениваем эффект через 2–4 недели.</p>
+                    <p class="mb-0">После успешного пилота вы можете масштабировать решение на другие подразделения и добавить новые сценарии.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 rounded-3 shadow-sm">
+                <h2 class="accordion-header" id="q6-heading">
+                  <button class="accordion-button shadow-none rounded-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q6" aria-expanded="false" aria-controls="q6">
+                    Сколько стоит AiST Office и есть ли бесплатный период?
+                  </button>
+                </h2>
+                <div id="q6" class="accordion-collapse collapse" aria-labelledby="q6-heading" data-bs-parent="#faq">
+                  <div class="accordion-body fs-sm pt-0">
+                    <p>Стоимость зависит от выбранного тарифа и срока подписки. Для команд до 50 человек доступны тарифы Economy, Standard и Premium с гибкой помесячной и годовой оплатой.</p>
+                    <p class="mb-0">Мы также предоставляем тестовый период, чтобы вы могли оценить эффект от использования AiST Office на реальных задачах. Оставьте заявку — подберем оптимальный вариант под вашу компанию.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Subscription CTA -->
+      <section id="cta" class="container">
+        <div class="bg-secondary rounded-3 py-5 px-3 px-sm-4 px-lg-5 px-xl-0">
+          <div class="row align-items-center py-lg-4">
+            <div class="col-xl-5 col-md-6 offset-xl-1 mb-4 mb-md-0">
+              <div class="d-flex align-items-center">
+                <img src="assets/img/landing/app-showcase-1/notification-icon.svg" width="78" alt="Bell icon">
+                <div class="ps-3 ms-sm-3">
+                  <h2 class="h4 mb-0">
+                    Оставьте контакты — вышлем расчет экономии и подключим бесплатный период
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-5 col-md-6">
+              <div class="ps-lg-5 ms-xl-2">
+                <form class="input-group input-group-lg needs-validation" novalidate>
+                  <input type="email" id="subscr-email" class="form-control rounded-start ps-5" placeholder="Ваш email" required>
+                  <i class="bx bx-envelope fs-xl text-muted position-absolute top-50 start-0 translate-middle-y ms-3 zindex-5"></i>
+                  <div class="invalid-tooltip position-absolute top-100 start-0">Укажите корректный email.</div>
+                  <button type="submit" class="btn btn-primary px-sm-4">Получить расчет и демо</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer pt-5 pb-4 pb-lg-5">
+      <div class="container text-center pt-lg-3">
+        <div class="navbar-brand justify-content-center text-dark mb-2 mb-lg-4">
+          <img src="assets/img/logo.svg" class="me-2" width="60" alt="AiST">
+          <span class="fs-4">AiST</span>
+        </div>
+        <ul class="nav justify-content-center pt-3 pb-4 pb-lg-5">
+          <li class="nav-item"><a href="#top" class="nav-link">Продукт</a></li>
+          <li class="nav-item"><a href="#features" class="nav-link">Возможности</a></li>
+          <li class="nav-item"><a href="#how-it-works" class="nav-link">Процесс</a></li>
+          <li class="nav-item"><a href="#pricing" class="nav-link">Тарифы</a></li>
+          <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
+          <li class="nav-item"><a href="#cta" class="nav-link">Контакты</a></li>
+        </ul>
+        <div class="d-flex justify-content-center pt-4 mt-lg-3">
+          <a href="#" class="btn btn-icon btn-secondary btn-facebook mx-2" aria-label="Facebook">
+            <i class="bx bxl-facebook"></i>
+          </a>
+          <a href="#" class="btn btn-icon btn-secondary btn-instagram mx-2" aria-label="Instagram">
+            <i class="bx bxl-instagram"></i>
+          </a>
+          <a href="#" class="btn btn-icon btn-secondary btn-twitter mx-2" aria-label="Twitter">
+            <i class="bx bxl-twitter"></i>
+          </a>
+          <a href="#" class="btn btn-icon btn-secondary btn-youtube mx-2" aria-label="YouTube">
+            <i class="bx bxl-youtube"></i>
+          </a>
+        </div>
+        <p class="nav d-block fs-sm text-center pt-5 mt-lg-4 mb-0">
+          <span class="opacity-80">© Все права защищены. AiST.</span>
+        </p>
+      </div>
+    </footer>
+
+
+    <!-- Back to top button -->
+    <a href="#top" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Наверх</span>
+      <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+    </a>
+
+
+    <!-- Vendor Scripts -->
+    <script src="assets/vendor/rellax/rellax.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main Theme Script -->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>

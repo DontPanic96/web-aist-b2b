@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <title>AiST - AI-решения для бизнеса | B2B платформа</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AiST - интеллектуальная B2B платформа для автоматизации бизнес-процессов. AI-агенты, офисный помощник, поддержка клиентов и предиктивная аналитика для российского бизнеса.">
+    <meta name="keywords" content="AI для бизнеса, B2B решения, искусственный интеллект, автоматизация процессов, AiST Office, AiST Personal, AiST Dialog, AiST Predict, AI-агенты, цифровая трансформация, российские AI решения">
+    <meta name="author" content="AiST">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Theme switcher (color modes) -->
+    <script src="assets/js/theme-switcher.js"></script>
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#6366f1">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css">
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css">
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      [data-bs-theme="dark"] .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      [data-bs-theme="dark"] .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      [data-bs-theme="dark"] .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1000);
+        };
+      })();
+    </script>
+
+  </head>
+
+
+  <!-- Body -->
+  <body>
+
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Загрузка...</span>
+      </div>
+    </div>
+
+
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to bottom of page if there is little content -->
+    <main class="page-wrapper">
+
+
+      <!-- Navbar -->
+      <!-- Remove "navbar-sticky" class to make navigation bar scrollable with page -->
+      <header class="header navbar navbar-expand-lg position-absolute navbar-sticky">
+        <div class="container px-3">
+          <a href="index.html" class="navbar-brand pe-3">
+            <span class="text-primary fw-bold">Ai</span>ST
+          </a>
+          <div id="navbarNav" class="offcanvas offcanvas-end">
+            <div class="offcanvas-header border-bottom">
+              <h5 class="offcanvas-title">Меню</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a href="index.html" class="nav-link active" aria-current="page">Главная</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Решения</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" class="dropdown-item">Платформенные решения</a></li>
+                    <li><a href="#" class="dropdown-item">Интеграционные решения</a></li>
+                    <li><a href="#" class="dropdown-item">Консалтинг</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Продукты</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="product-aist-office.html" class="dropdown-item">AiST Office</a></li>
+                    <li><a href="product-aist-personal.html" class="dropdown-item">AiST Personal</a></li>
+                    <li><a href="product-aist-predict.html" class="dropdown-item">AiST Predict</a></li>
+                    <li><a href="product-aist-dialog.html" class="dropdown-item">AiST Dialog</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">О нас</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" class="dropdown-item">О компании</a></li>
+                    <li><a href="#" class="dropdown-item">Преимущества</a></li>
+                    <li><a href="#" class="dropdown-item">Кейсы</a></li>
+                    <li><a href="#" class="dropdown-item">Отрасли</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a href="#contacts" class="nav-link">Контакты</a>
+                </li>
+              </ul>
+            </div>
+            <div class="offcanvas-header border-top">
+              <div class="dropdown me-2">
+                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bx bx-globe me-1"></i>Русский
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="dropdown-item">Русский</a></li>
+                  <li><a href="#" class="dropdown-item">English</a></li>
+                </ul>
+              </div>
+              <a href="#demo" class="btn btn-primary w-100">
+                <i class="bx bx-play-circle fs-4 lh-1 me-1"></i>
+                &nbsp;Запросить демо
+              </a>
+            </div>
+          </div>
+          <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
+            <input type="checkbox" class="form-check-input" id="theme-mode">
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Светлая</label>
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Темная</label>
+          </div>
+          <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a href="#consultation" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex">
+            <i class="bx bx-phone-call fs-5 lh-1 me-1"></i>
+            &nbsp;Консультация
+          </a>
+        </div>
+      </header>
+
+
+      <!-- Hero section with layer parallax gfx -->
+      <section class="position-relative overflow-hidden py-4 mb-3">
+        <div class="container pt-lg-3">
+          <div class="row flex-lg-nowrap">
+            <div class="col-lg-6 col-xl-5 text-center text-lg-start pt-5 mt-xl-4">
+              <h1 class="display-4 pt-5 pb-2 pb-lg-3 mt-sm-2 mt-lg-5">AiST: AI-трансформация вашего бизнеса</h1>
+              <p class="fs-lg mb-4 mb-lg-5">Интеллектуальная платформа для автоматизации бизнес-процессов. Повысьте эффективность компании до 70% с помощью AI-решений.</p>
+              <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+                <a href="#trial" class="btn btn-primary btn-lg">Попробовать бесплатно</a>
+                <a href="#demo" class="btn btn-outline-secondary btn-lg">Запросить демо</a>
+              </div>
+              <div class="pt-5 mt-xl-5">
+                <h6 class="pt-xl-3 pb-3 pb-lg-4">Крупнейшие компании России выбирают AiST</h6>
+                <div class="d-flex justify-content-center justify-content-lg-start mx-xl-n2">
+                  <a href="#" class="d-block me-2">
+                    <div class="bg-light rounded-3 p-3 text-center fw-bold" style="width: 135px;">Сбербанк</div>
+                  </a>
+                  <a href="#" class="d-block me-2">
+                    <div class="bg-light rounded-3 p-3 text-center fw-bold" style="width: 135px;">Медскан</div>
+                  </a>
+                  <a href="#" class="d-block me-2">
+                    <div class="bg-light rounded-3 p-3 text-center fw-bold" style="width: 135px;">Газпром</div>
+                  </a>
+                  <a href="#" class="d-block me-2">
+                    <div class="bg-light rounded-3 p-3 text-center fw-bold" style="width: 135px;">Diasoft</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Layer parallax -->
+            <div class="parallax mt-4 ms-4 me-lg-0 ms-lg-n5 ms-xl-n3 mt-lg-n4">
+              <div class="parallax-layer" data-depth="0.1">
+                <img src="assets/img/landing/saas-1/hero/layer01.png" width="1416" alt="AI Layer">
+              </div>
+              <div class="parallax-layer zindex-2" data-depth="0.15">
+                <img src="assets/img/landing/saas-1/hero/layer02.png" alt="AI Layer">
+              </div>
+              <div class="parallax-layer zindex-2" data-depth="0.35">
+                <img src="assets/img/landing/saas-1/hero/layer03.png" alt="AI Layer">
+              </div>
+              <div class="parallax-layer zindex-2" data-depth="0.25">
+                <img src="assets/img/landing/saas-1/hero/layer04.png" alt="AI Layer">
+              </div>
+              <div class="parallax-layer zindex-2" data-depth="0.4">
+                <img src="assets/img/landing/saas-1/hero/layer05.png" alt="AI Layer">
+              </div>
+              <div class="parallax-layer zindex-2" data-depth="0.28">
+                <img src="assets/img/landing/saas-1/hero/layer06.png" alt="AI Layer">
+              </div>
+              <div class="parallax-layer zindex-2" data-depth="0.35">
+                <img src="assets/img/landing/saas-1/hero/layer07.png" alt="AI Layer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Features (Icon + Text) -->
+      <section class="container">
+        <h2 class="h1 text-center pb-4 pb-lg-5">Почему выбирают AiST</h2>
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-6 text-center pb-md-2 mb-3 mb-lg-4">
+            <div class="d-inline-block bg-secondary rounded-circle p-3 mb-4">
+              <img src="assets/img/landing/saas-1/features/chat.svg" width="32" alt="Иконка чата">
+            </div>
+            <h3 class="h5 pb-1 mb-2">Интеграция с системами</h3>
+            <p class="fs-sm">Быстрая интеграция с вашими CRM, ERP и другими бизнес-системами. Полная совместимость с российским ПО.</p>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 text-center pb-md-2 mb-3 mb-lg-4">
+            <div class="d-inline-block bg-secondary rounded-circle p-3 mb-4">
+              <img src="assets/img/landing/saas-1/features/analytics.svg" width="32" alt="Иконка аналитики">
+            </div>
+            <h3 class="h5 pb-1 mb-2">Предиктивная аналитика</h3>
+            <p class="fs-sm">Умная аналитика данных с точностью прогнозов до 95%. Автоматические отчеты и дашборды.</p>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 text-center pb-md-2 mb-3 mb-lg-4">
+            <div class="d-inline-block bg-secondary rounded-circle p-3 mb-4">
+              <img src="assets/img/landing/saas-1/features/bell.svg" width="32" alt="Иконка уведомлений">
+            </div>
+            <h3 class="h5 pb-1 mb-2">24/7 поддержка</h3>
+            <p class="fs-sm">Круглосуточная техническая поддержка и обучение персонала. Персональный менеджер для каждого клиента.</p>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 text-center pb-md-2 mb-3 mb-lg-4">
+            <div class="d-inline-block bg-secondary rounded-circle p-3 mb-4">
+              <img src="assets/img/landing/saas-1/features/tasks.svg" width="32" alt="Иконка задач">
+            </div>
+            <h3 class="h5 pb-1 mb-2">Автоматизация процессов</h3>
+            <p class="fs-sm">Высвобождение до 70% рабочего времени сотрудников за счет автоматизации рутинных задач.</p>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 text-center pb-md-2 mb-3 mb-lg-4">
+            <div class="d-inline-block bg-secondary rounded-circle p-3 mb-4">
+              <img src="assets/img/landing/saas-1/features/calendar.svg" width="32" alt="Иконка календаря">
+            </div>
+            <h3 class="h5 pb-1 mb-2">Прозрачное ценообразование</h3>
+            <p class="fs-sm">Гибкие тарифные планы для бизнеса любого масштаба. Нет скрытых платежей и комиссий.</p>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 text-center pb-md-2 mb-3 mb-lg-4">
+            <div class="d-inline-block bg-secondary rounded-circle p-3 mb-4">
+              <img src="assets/img/landing/saas-1/features/add-group.svg" width="32" alt="Иконка команды">
+            </div>
+            <h3 class="h5 pb-1 mb-2">Многопользовательский доступ</h3>
+            <p class="fs-sm">Неограниченное количество пользователей. Ролевая модель доступа и настройки прав.</p>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 text-center pb-md-2 mb-3 mb-lg-4">
+            <div class="d-inline-block bg-secondary rounded-circle p-3 mb-4">
+              <img src="assets/img/landing/saas-1/features/headset.svg" width="32" alt="Иконка гарнитуры">
+            </div>
+            <h3 class="h5 pb-1 mb-2">Российская разработка</h3>
+            <p class="fs-sm">Полное соответствие 152-ФЗ. Данные обрабатываются на территории РФ.</p>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 text-center pb-md-2 mb-3 mb-lg-4">
+            <div class="d-inline-block bg-secondary rounded-circle p-3 mb-4">
+              <img src="assets/img/landing/saas-1/features/shield.svg" width="32" alt="Иконка щита">
+            </div>
+            <h3 class="h5 pb-1 mb-2">Безопасность данных</h3>
+            <p class="fs-sm">Шифрование данных, резервное копирование, соответствие стандартам информационной безопасности.</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Dashboard -->
+      <section class="container pt-3 pt-md-4 pt-lg-5 pb-2 mt-lg-2 mt-xl-4">
+        <div class="row align-items-center">
+          <div class="rellax col-md-7" data-rellax-percentage="0.5" data-rellax-speed="-0.6" data-disable-parallax-down="lg">
+            <img src="assets/img/landing/saas-1/dashboard.png" class="d-block mx-auto" width="746" alt="Панель управления AiST">
+          </div>
+          <div class="rellax col-md-5 col-xl-4 offset-xl-1 d-flex d-sm-block flex-column" data-rellax-percentage="0.5" data-rellax-speed="0.8" data-disable-parallax-down="lg">
+            <h2 class="pb-3 pt-2 pt-md-0">Управляйте работой эффективно</h2>
+            <ul class="list-unstyled pb-2">
+              <li class="d-flex align-items-center pb-1 mb-2">
+                <i class="bx bx-check-circle text-primary fs-xl me-2"></i>
+                Мощная система управления проектами
+              </li>
+              <li class="d-flex align-items-center pb-1 mb-2">
+                <i class="bx bx-check-circle text-primary fs-xl me-2"></i>
+                Прозрачное управление работой
+              </li>
+              <li class="d-flex align-items-center pb-1 mb-2">
+                <i class="bx bx-check-circle text-primary fs-xl me-2"></i>
+                Управляйте работой и фокусируйтесь на самых важных задачах
+              </li>
+              <li class="d-flex align-items-center pb-1 mb-2">
+                <i class="bx bx-check-circle text-primary fs-xl me-2"></i>
+                Отслеживайте прогресс с интерактивными графиками
+              </li>
+              <li class="d-flex align-items-center pb-1 mb-2">
+                <i class="bx bx-check-circle text-primary fs-xl me-2"></i>
+                Простой способ отслеживания времени выполнения задач
+              </li>
+            </ul>
+            <a href="#features" class="btn btn-primary">
+              Узнать больше
+              <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Use cases (Tabs) -->
+      <section class="container pt-5 pb-2 mt-3 mt-sm-4 mt-xl-5">
+        <h2 class="h1 text-center pb-3 pb-lg-4">Продукты AiST</h2>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs flex-nowrap justify-content-lg-center overflow-auto pb-2 mb-3 mb-lg-4" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link text-nowrap active" id="aist-office-tab" data-bs-toggle="tab" data-bs-target="#aist-office" type="button" role="tab" aria-controls="aist-office" aria-selected="true">
+              <i class="bx bx-laptop fs-lg opacity-60 me-2"></i>
+              AiST Office
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link text-nowrap" id="aist-personal-tab" data-bs-toggle="tab" data-bs-target="#aist-personal" type="button" role="tab" aria-controls="aist-personal" aria-selected="false">
+              <i class="bx bx-user fs-lg opacity-60 me-2"></i>
+              AiST Personal
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link text-nowrap" id="aist-dialog-tab" data-bs-toggle="tab" data-bs-target="#aist-dialog" type="button" role="tab" aria-controls="aist-dialog" aria-selected="false">
+              <i class="bx bx-message-rounded-dots fs-lg opacity-60 me-2"></i>
+              AiST Dialog
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link text-nowrap" id="aist-predict-tab" data-bs-toggle="tab" data-bs-target="#aist-predict" type="button" role="tab" aria-controls="aist-predict" aria-selected="false">
+              <i class="bx bx-line-chart fs-lg opacity-60 me-2"></i>
+              AiST Predict
+            </button>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content bg-secondary rounded-3 py-4">
+
+          <!-- AiST Office -->
+          <div class="tab-pane fade show active" id="aist-office" role="tabpanel" aria-labelledby="aist-office-tab">
+            <div class="row align-items-center pt-3 pt-sm-4 pt-md-0 px-3 px-sm-4 px-lg-0">
+              <div class="col-lg-4 col-md-5 offset-lg-1 text-center text-md-start">
+                <h3 class="mb-lg-4">AiST Office</h3>
+                <p>Персональный AI-помощник для сотрудников. Автоматизация документооборота, подготовка отчетов и презентаций, обработка клиентских запросов.</p>
+                <ul class="list-unstyled">
+                  <li><i class="bx bx-check text-primary me-2"></i>Автоматизация документооборота</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Подготовка отчетов и презентаций</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Обработка клиентских запросов</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Генерация маркетинговых материалов</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Юридическая экспертиза документов</li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-md-7 mt-md-4">
+                <img src="assets/img/landing/saas-1/use-cases/01.png" class="d-block my-lg-2 mx-auto me-md-0" width="595" alt="AiST Office интерфейс">
+              </div>
+            </div>
+          </div>
+
+          <!-- AiST Personal -->
+          <div class="tab-pane fade" id="aist-personal" role="tabpanel" aria-labelledby="aist-personal-tab">
+            <div class="row align-items-center pt-3 pb-2 pb-sm-3 pt-sm-4 pt-md-0 px-3 px-sm-4 px-lg-0">
+              <div class="col-lg-4 col-md-5 offset-lg-1 text-center text-md-start">
+                <h3 class="mb-lg-4">AiST Personal</h3>
+                <p>Индивидуальные AI-агенты для бизнеса. Специализированные решения для рекрутинга, продаж, аналитики и медицинских учреждений.</p>
+                <ul class="list-unstyled">
+                  <li><i class="bx bx-check text-primary me-2"></i>AI Рекрутер с интеграцией hh.ru</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>AI Менеджер по продажам</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>AI Медицинский менеджер</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>AI Аналитик данных</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Кастомизация под специфику</li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-md-7 mt-md-4">
+                <img src="assets/img/landing/saas-1/use-cases/02.png" class="d-block my-lg-2 mx-auto me-md-0" width="502" alt="AiST Personal интерфейс">
+              </div>
+            </div>
+          </div>
+
+          <!-- AiST Dialog -->
+          <div class="tab-pane fade" id="aist-dialog" role="tabpanel" aria-labelledby="aist-dialog-tab">
+            <div class="row align-items-center pt-3 pt-sm-4 pt-md-0 px-3 pe-sm-4 pe-md-0 ps-sm-4 ps-lg-0">
+              <div class="col-lg-4 col-md-5 offset-lg-1 text-center text-md-start">
+                <h3 class="mb-lg-4">AiST Dialog</h3>
+                <p>AI для поддержки клиентов 24/7. Интеллектуальные боты и виджеты для сайтов, мессенджеров и контакт-центров.</p>
+                <ul class="list-unstyled">
+                  <li><i class="bx bx-check text-primary me-2"></i>Интеллектуальный виджет для сайта</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Telegram и MAX боты</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Голосовой ассистент</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Многоязычная поддержка</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Интеграция с CRM системами</li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-md-7 mt-n3 mt-md-1">
+                <img src="assets/img/landing/saas-1/use-cases/03.png" class="d-block mb-lg-2 mx-auto me-md-0" width="525" alt="AiST Dialog интерфейс">
+              </div>
+            </div>
+          </div>
+
+          <!-- AiST Predict -->
+          <div class="tab-pane fade" id="aist-predict" role="tabpanel" aria-labelledby="aist-predict-tab">
+            <div class="row align-items-center pt-3 pt-sm-4 pt-md-0 px-3 pe-sm-4 pe-md-0 ps-sm-4 ps-lg-0">
+              <div class="col-lg-4 col-md-5 offset-lg-1 text-center text-md-start">
+                <h3 class="mb-lg-4">AiST Predict</h3>
+                <p>Мониторинг и предиктивная аналитика. Реал-тайм аналитика данных, скоринг и прогнозирование трендов.</p>
+                <ul class="list-unstyled">
+                  <li><i class="bx bx-check text-primary me-2"></i>Реал-тайм аналитика данных</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Скоринг и предиктивные модели</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Интеграция с BI-системами</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Прогнозирование трендов</li>
+                  <li><i class="bx bx-check text-primary me-2"></i>Автоматические отчеты и дашборды</li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-md-7 mt-n3 mt-md-1">
+                <img src="assets/img/landing/saas-1/use-cases/04.png" class="d-block mb-lg-2 mx-auto me-md-0" width="545" alt="AiST Predict интерфейс">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Testimonials -->
+      <section class="bg-secondary py-5">
+        <div class="container py-2 py-md-3 py-lg-4 py-xl-5">
+          <div class="row row-cols-1 row-cols-md-2 gx-3 gx-lg-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <div class="card border-0 bg-dark h-100 p-xl-4">
+                <div class="card-body">
+                  <h2 class="display-1 text-light">100+</h2>
+                  <p class="lead fw-medium text-light"><span class="opacity-70">компаний уже используют</span> <span class="fw-bold">AiST для трансформации бизнеса</span><span class="opacity-70">. Инновационные AI-решения для российского бизнеса.</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm p-4 p-xxl-5">
+                <div class="d-flex justify-content-between pb-4 mb-2">
+                  <span class="btn btn-icon btn-primary btn-lg shadow-primary pe-none">
+                    <i class="bx bxs-quote-left"></i>
+                  </span>
+                  <div class="d-flex">
+                    <button type="button" id="testimonials-prev" class="btn btn-prev btn-icon btn-sm me-2" aria-label="Предыдущий">
+                      <i class="bx bx-chevron-left"></i>
+                    </button>
+                    <button type="button" id="testimonials-next" class="btn btn-next btn-icon btn-sm ms-2" aria-label="Следующий">
+                      <i class="bx bx-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Slider -->
+                <div class="swiper mx-0 mb-md-n2 mb-xxl-n3" data-swiper-options='{
+                  "spaceBetween": 24,
+                  "loop": true,
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "clickable": true
+                  },
+                  "navigation": {
+                    "prevEl": "#testimonials-prev",
+                    "nextEl": "#testimonials-next"
+                  }
+                }'>
+                  <div class="swiper-wrapper">
+
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto">
+                      <figure class="card h-100 position-relative border-0 bg-transparent">
+                        <blockquote class="card-body p-0 mb-0">
+                          <p class="fs-lg mb-0">"AiST помог нам автоматизировать 80% рутинных операций в финансовом отделе. Экономия времени составила 15 часов в неделю на каждого сотрудника. Отличное решение для российского бизнеса!"</p>
+                        </blockquote>
+                        <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
+                          <img src="assets/img/avatar/14.jpg" width="60" class="rounded-circle" alt="Анна Петрова">
+                          <div class="ps-3">
+                            <h6 class="fw-semibold lh-base mb-0">Анна Петрова</h6>
+                            <span class="fs-sm text-muted">Финансовый директор, Московский Кредитный Банк</span>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto">
+                      <figure class="card h-100 position-relative border-0 bg-transparent">
+                        <blockquote class="card-body p-0 mb-0">
+                          <p class="fs-lg mb-0">"Внедрили AiST Personal для HR-отдела. AI-рекрутер обрабатывает до 500 резюме в день, сократило время подбора кандидатов на 50%. Рекомендуем!"</p>
+                        </blockquote>
+                        <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
+                          <img src="assets/img/avatar/13.jpg" width="60" class="rounded-circle" alt="Михаил Иванов">
+                          <div class="ps-3">
+                            <h6 class="fw-semibold lh-base mb-0">Михаил Иванов</h6>
+                            <span class="fs-sm text-muted">HR-директор, Техносистема</span>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto">
+                      <figure class="card h-100 position-relative border-0 bg-transparent">
+                        <blockquote class="card-body p-0 mb-0">
+                          <p class="fs-lg mb-0">"AiST Dialog полностью закрывает нашу службу поддержки. Теперь 80% запросов обрабатываются AI-ассистентом, а клиенты получают ответы 24/7. Окупаемость составила 3 месяца!"</p>
+                        </blockquote>
+                        <figcaption class="card-footer border-0 d-flex align-items-center w-100 pb-2">
+                          <img src="assets/img/avatar/11.jpg" width="60" class="rounded-circle" alt="Елена Смирнова">
+                          <div class="ps-3">
+                            <h6 class="fw-semibold lh-base mb-0">Елена Смирнова</h6>
+                            <span class="fs-sm text-muted">Операционный директор, ЭХО-Продукт</span>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+                  </div>
+
+                  <!-- Pagination (bullets) -->
+                  <div class="swiper-pagination position-relative mt-5"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Sign up CTA -->
+      <section id="consultation" class="bg-primary py-5">
+        <div class="container py-2 py-md-3 py-lg-4 py-xl-5">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <h2 class="text-light mb-4">Готовы трансформировать ваш бизнес с AI?</h2>
+              <p class="text-light opacity-90 mb-lg-5">Получите персональную консультацию и подбор решения для вашей компании</p>
+              <div class="d-flex flex-column flex-md-row gap-3">
+                <a href="#demo-form" class="btn btn-light">Запросить демо</a>
+                <a href="#consultation-form" class="btn btn-outline-light">Консультация эксперта</a>
+              </div>
+            </div>
+            <div class="col-lg-5 ms-auto">
+              <form id="consultation-form" class="needs-validation" novalidate>
+                <div class="mb-3">
+                  <label for="consult-name" class="form-label text-light">Ваше имя</label>
+                  <input type="text" class="form-control" id="consult-name" placeholder="Введите имя" required>
+                  <div class="invalid-feedback">Пожалуйста, введите ваше имя</div>
+                </div>
+                <div class="mb-3">
+                  <label for="consult-company" class="form-label text-light">Компания</label>
+                  <input type="text" class="form-control" id="consult-company" placeholder="Название компании" required>
+                  <div class="invalid-feedback">Пожалуйста, введите название компании</div>
+                </div>
+                <div class="mb-3">
+                  <label for="consult-email" class="form-label text-light">Email</label>
+                  <input type="email" class="form-control" id="consult-email" placeholder="email@company.ru" required>
+                  <div class="invalid-feedback">Пожалуйста, введите корректный email</div>
+                </div>
+                <div class="mb-3">
+                  <label for="consult-phone" class="form-label text-light">Телефон</label>
+                  <input type="tel" class="form-control" id="consult-phone" placeholder="+7 (___) ___-__-__">
+                </div>
+                <div class="mb-4 form-check">
+                  <input type="checkbox" class="form-check-input" id="consult-consent" required>
+                  <label class="form-check-label text-light opacity-80 fs-sm" for="consult-consent">Я согласен на обработку персональных данных и получение коммерческого предложения</label>
+                </div>
+                <button type="submit" class="btn btn-outline-light w-100">Получить консультацию</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer id="contacts" class="bg-dark text-light py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="mb-3">Продукты AiST</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="product-aist-office.html" class="text-light opacity-70 text-decoration-none">AiST Office</a></li>
+              <li class="mb-2"><a href="product-aist-personal.html" class="text-light opacity-70 text-decoration-none">AiST Personal</a></li>
+              <li class="mb-2"><a href="product-aist-dialog.html" class="text-light opacity-70 text-decoration-none">AiST Dialog</a></li>
+              <li class="mb-2"><a href="product-aist-predict.html" class="text-light opacity-70 text-decoration-none">AiST Predict</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="mb-3">Решения</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#" class="text-light opacity-70 text-decoration-none">Платформенные решения</a></li>
+              <li class="mb-2"><a href="#" class="text-light opacity-70 text-decoration-none">Интеграции</a></li>
+              <li class="mb-2"><a href="#" class="text-light opacity-70 text-decoration-none">API & Разработка</a></li>
+              <li class="mb-2"><a href="#" class="text-light opacity-70 text-decoration-none">Консалтинг</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="mb-3">О компании</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#" class="text-light opacity-70 text-decoration-none">О AiST</a></li>
+              <li class="mb-2"><a href="#" class="text-light opacity-70 text-decoration-none">Преимущества</a></li>
+              <li class="mb-2"><a href="#" class="text-light opacity-70 text-decoration-none">Кейсы</a></li>
+              <li class="mb-2"><a href="#" class="text-light opacity-70 text-decoration-none">Отрасли</a></li>
+              <li class="mb-2"><a href="#" class="text-light opacity-70 text-decoration-none">Партнеры</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="mb-3">Контакты</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2 d-flex align-items-center">
+                <i class="bx bx-envelope me-2"></i>
+                <span class="text-light opacity-80">info@aist.ru</span>
+              </li>
+              <li class="mb-2 d-flex align-items-center">
+                <i class="bx bx-phone me-2"></i>
+                <span class="text-light opacity-80">+7 (495) 123-45-67</span>
+              </li>
+              <li class="mb-2 d-flex align-items-center">
+                <i class="bx bx-map me-2"></i>
+                <span class="text-light opacity-80">Москва, Пресненская наб., 12</span>
+              </li>
+              <li class="mb-2 d-flex align-items-center">
+                <i class="bx bx-message-rounded-dots me-2"></i>
+                <span class="text-light opacity-80">Онлайн-чат</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-top border-secondary mt-4 pt-4 text-center">
+          <p class="text-light opacity-60 mb-2">© 2024 AiST. Все права защищены.</p>
+          <p class="text-light opacity-60 mb-0">
+            <a href="#" class="text-light opacity-80 text-decoration-none me-3">Политика конфиденциальности</a>
+            <a href="#" class="text-light opacity-80 text-decoration-none me-3">Пользовательское соглашение</a>
+            <a href="#" class="text-light opacity-80 text-decoration-none me-3">Документация</a>
+          </p>
+          <p class="text-light opacity-60 mb-0 mt-2">Соответствие требованиям 152-ФЗ о персональных данных</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Vendor Scripts -->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/rellax/rellax.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main Theme Script -->
+    <script src="assets/js/theme.min.js"></script>
+
+    <!-- Custom Price Calculation Script -->
+    <script>
+      (function() {
+        const pricingToggle = document.getElementById('pricing');
+        const monthlyPrices = document.querySelectorAll('.monthly-price');
+        const annualPrices = document.querySelectorAll('.annual-price');
+
+        if (pricingToggle && monthlyPrices.length > 0 && annualPrices.length > 0) {
+          // Correct base prices with 10% discount for annual
+          const baseMonthlyPrice = 29900;
+          const baseStandardPrice = 89900;
+
+          pricingToggle.addEventListener('change', function() {
+            const isAnnual = this.checked;
+
+            monthlyPrices.forEach((element, index) => {
+              if (element.textContent.includes('₽')) {
+                if (index === 0) {
+                  element.textContent = isAnnual ? `₽${baseMonthlyPrice}` : `₽${baseMonthlyPrice}`;
+                } else if (index === 1) {
+                  element.textContent = isAnnual ? `₽${baseStandardPrice}` : `₽${baseStandardPrice}`;
+                }
+              }
+            });
+
+            annualPrices.forEach((element, index) => {
+              if (element.textContent.includes('₽')) {
+                if (index === 0) {
+                  element.textContent = isAnnual ? `₽${Math.round(baseMonthlyPrice * 0.9 * 12)}` : `₽${Math.round(baseMonthlyPrice * 0.9)}`;
+                } else if (index === 1) {
+                  element.textContent = isAnnual ? `₽${Math.round(baseStandardPrice * 0.9 * 12)}` : `₽${Math.round(baseStandardPrice * 0.9)}`;
+                }
+              }
+            });
+          });
+        }
+      })();
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <title>AiST Predict | Мониторинг и предиктивная аналитика</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AiST Predict - AI-ассистент для непрерывного мониторинга, предиктивной аналитики и автоматизации бизнес-процессов с возможностью работы в закрытом контуре">
+    <meta name="keywords" content="искусственный интеллект, предиктивная аналитика, мониторинг 24/7, автоматизация бизнес-процессов, ai ассистент, анализ данных">
+    <meta name="author" content="AiST">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Theme switcher (color modes) -->
+    <script src="assets/js/theme-switcher.js"></script>
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#6366f1">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css">
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css">
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      [data-bs-theme="dark"] .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      [data-bs-theme="dark"] .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      [data-bs-theme="dark"] .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1000);
+        };
+      })();
+    </script>
+
+  </head>
+
+
+  <!-- Body -->
+  <body>
+    
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Загрузка...</span>
+      </div>
+    </div>
+
+
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+
+      <!-- Navbar -->
+      <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page -->
+      <header class="header navbar navbar-expand-lg navbar-dark position-absolute navbar-sticky">
+        <div class="container px-3">
+          <a href="index.html" class="navbar-brand pe-3">
+            <img src="assets/img/logo.svg" width="47" alt="AiST">
+            AiST
+          </a>
+          <div id="navbarNav" class="offcanvas offcanvas-end bg-dark">
+            <div class="offcanvas-header border-bottom border-light">
+              <h5 class="offcanvas-title text-white">Меню</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a href="#features" class="nav-link">Возможности</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#cases" class="nav-link">Кейсы</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#pricing" class="nav-link">Тарифы</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#contact" class="nav-link">Контакты</a>
+                </li>
+              </ul>
+            </div>
+            <div class="offcanvas-header border-top border-light">
+              <a href="#contact" class="btn btn-primary w-100">
+                <i class="bx bx-rocket fs-4 lh-1 me-1"></i>
+                &nbsp;Начать работу
+              </a>
+            </div>      
+          </div>
+          <div class="pe-lg-1 ms-auto me-4" data-bs-theme="dark">
+            <div class="form-check form-switch mode-switch" data-bs-toggle="mode">
+              <input type="checkbox" class="form-check-input" id="theme-mode">
+              <label class="form-check-label d-none d-sm-block" for="theme-mode">Светлая</label>
+              <label class="form-check-label d-none d-sm-block" for="theme-mode">Тёмная</label>
+            </div>
+          </div>
+          <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a href="#contact" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex">
+            <i class="bx bx-rocket fs-5 lh-1 me-1"></i>
+            &nbsp;Начать работу
+          </a>
+        </div>
+      </header>
+
+
+      <!-- Hero + BG parallax -->
+      <section class="jarallax bg-dark min-vh-100" data-jarallax data-speed="0.4" data-bs-theme="dark">
+        <span class="position-absolute top-0 start-0 w-100 h-100" style="background: radial-gradient(116.18% 118% at 50% 100%, rgba(99, 102, 241, 0.1) 0%, rgba(218, 70, 239, 0.05) 41.83%, rgba(241, 244, 253, 0.07) 82.52%);"></span>
+        <div class="jarallax-img" style="background-image: url(assets/img/landing/software-agency-2/hero-bg.png);"></div>
+        <div class="min-vh-100 d-flex flex-column py-5">
+
+          <div class="container position-relative text-center zindex-5 pt-4 pt-md-5 pb-5 mt-auto">
+            <div class="row mt-5">
+              <div class="col-xl-10 mx-auto">
+                <h1 class="display-1 mb-md-4 pb-3">Мониторинг и предиктивная аналитика AiST Predict</h1>
+                <p class="text-body mx-auto mb-md-5 mb-4 pb-xl-2 pb-md-0 pb-sm-2 fs-5" style="max-width: 42rem;">
+                  Безграничные возможности доступа к контекстной и предиктивной аналитике, автоматизации и мониторингу любых данных 24/7
+                </p>
+                <a href="#contact" class="btn btn-lg btn-primary shadow-primary">Получить консультацию</a>
+              </div>
+            </div>
+          </div>
+          <div class="container mt-auto pb-lg-2 pb-xl-3">
+            <ul class="list-unstyled d-flex align-items-start justify-content-center flex-wrap text-nowrap mt-xl-0 mt-md-n4 mt-sm-n3 mt-n2 ms-md-n4 ms-n3 mb-0 pt-lg-5 pt-md-4">
+              <li class="d-flex align-items-center text-body mt-md-4 mt-sm-3 mt-2 ms-md-4 ms-3">
+                <i class="bx bx-check-circle me-2 fs-5 text-primary"></i>
+                Мониторинг 24/7
+              </li>
+              <li class="d-flex align-items-center text-body mt-md-4 mt-sm-3 mt-2 ms-md-4 ms-3">
+                <i class="bx bx-check-circle me-2 fs-5 text-primary"></i>
+                Снижение расходов на 90%
+              </li>
+              <li class="d-flex align-items-center text-body mt-md-4 mt-sm-3 mt-2 ms-md-4 ms-3">
+                <i class="bx bx-check-circle me-2 fs-5 text-primary"></i>
+                Работа в закрытом контуре
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Our Services / Features -->
+      <section id="features" class="container my-5 py-lg-5 py-md-4 pt-2 pb-3">
+        <h2 class="h1 mb-md-5 mb-4 py-xl-3 pb-lg-2 pb-md-0 pb-sm-2 text-center">Возможности системы</h2>
+
+        <!-- Feature item: Мониторинг в реальном времени -->
+        <div class="row gy-4 mb-5 pb-xl-5 pb-md-4 pb-3">
+          <div class="col-lg-5 col-md-6 order-md-1 order-2 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+            <div class="align-self-center pe-lg-0 pe-md-4">
+              <h3 class="mb-md-4">Мониторинг в реальном времени</h3>
+              <p class="mb-md-4 mb-3 fs-lg">Непрерывный контроль информационных потоков без перерывов. Система автоматически реагирует на события по заданным сценариям и обрабатывает поступающие данные в режиме реального времени.</p>
+              <hr class="my-md-4 my-3">
+              <ul class="list-unstyled d-flex flex-wrap mt-md-n3 mt-n2 ms-md-n4 ms-n3 mb-0 pb-lg-4 pb-md-2 fw-bold">
+                <li class="mt-md-3 mt-2 ms-md-4 ms-3">24/7 контроль</li>
+                <li class="mt-md-3 mt-2 ms-md-4 ms-3">Автореакция</li>
+                <li class="mt-md-3 mt-2 ms-md-4 ms-3">Real-time обработка</li>
+                <li class="mt-md-3 mt-2 ms-md-4 ms-3">Мгновенные уведомления</li>
+              </ul>
+              <a href="#contact" class="btn btn-lg btn-outline-primary w-sm-auto w-100 mt-4">Узнать больше</a>
+            </div>
+          </div>
+          <div class="col-md-6 offset-lg-1 order-md-2 order-1 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+            <div class="bg-secondary rounded-3">
+              <img src="assets/img/landing/software-agency-2/services/01-light.png" alt="Мониторинг 24/7" class="d-dark-mode-none d-block">
+              <img src="assets/img/landing/software-agency-2/services/01-dark.png" alt="Мониторинг 24/7" class="d-dark-mode-block d-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature item: Предиктивная аналитика -->
+        <div class="row gy-4 mb-5 pb-xl-5 pb-md-4 pb-3">
+          <div class="col-lg-5 col-md-6 order-md-1 order-2 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+            <div class="align-self-center pe-lg-0 pe-md-4">
+              <h3 class="mb-md-4">Предиктивная аналитика</h3>
+              <p class="mb-md-4 mb-3 fs-lg">Система анализирует тренды и выявляет закономерности в данных, прогнозирует потенциальные проблемы и предлагает превентивные меры до возникновения рисков.</p>
+              <hr class="my-md-4 my-3">
+              <div class="d-flex flex-wrap text-nowrap mb-4">
+                <div class="me-4 pe-3">
+                  <h5 class="h2 mb-1">+78%</h5>
+                  <span class="text-body">Точность прогнозов</span>
+                </div>
+                <div class="me-4 pe-3">
+                  <h5 class="h2 mb-1">156</h5>
+                  <span class="text-body">Рисков предотвращено</span>
+                </div>
+              </div>
+              <a href="#contact" class="btn btn-lg btn-outline-primary w-sm-auto w-100 mt-4">Узнать больше</a>
+            </div>
+          </div>
+          <div class="col-md-6 offset-lg-1 order-md-2 order-1 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+            <div class="bg-secondary rounded-3">
+              <img src="assets/img/landing/software-agency-2/services/02-light.png" alt="Предиктивная аналитика" class="d-dark-mode-none d-block">
+              <img src="assets/img/landing/software-agency-2/services/02-dark.png" alt="Предиктивная аналитика" class="d-dark-mode-block d-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature item: Автоматизация действий -->
+        <div class="row gy-4 mb-xl-3">
+          <div class="col-lg-5 col-md-6 order-md-1 order-2 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+            <div class="align-self-center pe-lg-0 pe-md-4">
+              <h3 class="mb-md-4">Автоматизация действий</h3>
+              <p class="mb-md-4 mb-3 fs-lg">Система автоматически выполняет рутинные операции: подготовку писем руководителям, изменение статусов задач, добавление контекстных комментариев и предложение решений проблем.</p>
+              <hr class="my-md-4 my-3">
+              <ul class="list-unstyled d-flex flex-wrap mt-md-n3 mt-n2 ms-md-n4 ms-n3 mb-0 pb-lg-4 pb-md-2 fw-bold">
+                <li class="mt-md-3 mt-2 ms-md-4 ms-3">Написание писем</li>
+                <li class="mt-md-3 mt-2 ms-md-4 ms-3">Изменение статусов</li>
+                <li class="mt-md-3 mt-2 ms-md-4 ms-3">Комментирование</li>
+                <li class="mt-md-3 mt-2 ms-md-4 ms-3">Решение проблем</li>
+              </ul>
+              <a href="#contact" class="btn btn-lg btn-outline-primary w-sm-auto w-100 mt-4">Узнать больше</a>
+            </div>
+          </div>
+          <div class="col-md-6 offset-lg-1 order-md-2 order-1 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+            <div class="bg-secondary rounded-3">
+              <img src="assets/img/landing/software-agency-2/services/03-light.png" alt="Автоматизация" class="d-dark-mode-none d-block">
+              <img src="assets/img/landing/software-agency-2/services/03-dark.png" alt="Автоматизация" class="d-dark-mode-block d-none">
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Key Benefits -->
+      <section class="position-relative py-5 bg-dark">
+        <span class="position-absolute top-0 start-0 d-dark-mode-block d-none w-100 h-100 bg-secondary"></span>
+        <div class="position-relative container my-lg-5 my-md-4 my-3 py-xl-3" data-bs-theme="dark">
+          <h2 class="h1 mb-md-4 mb-3 text-center">Ключевые преимущества</h2>
+          <p class="text-body mb-md-5 mb-4 pb-xl-3 pb-lg-2 pb-md-0 pb-sm-2 mx-auto text-center" style="max-width: 42rem;">Универсальный AI-ассистент для мониторинга, анализа и автоматизации бизнес-процессов с возможностью работы в закрытом контуре</p>
+
+          <!-- Swiper slider -->
+          <div class="swiper mt-n1" data-swiper-options='{
+            "spaceBetween": 24,
+            "breakpoints": {
+              "0": {
+                "slidesPerView": 1
+              },
+              "500": {
+                "slidesPerView": 2
+              },
+              "768": {
+                "slidesPerView": 3
+              },
+              "1200": {
+                "slidesPerView": 4
+              }
+            },
+            "pagination": {
+              "el": ".swiper-pagination",
+              "clickable": true
+            }
+          }'>
+            <div class="swiper-wrapper">
+
+              <!-- Benefit 1 -->
+              <div class="swiper-slide h-auto pt-1">
+                <div class="card shadow-sm card-hover position-relative h-100 py-md-1 px-md-2">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                      <i class="bx bx-time-five fs-1 text-primary me-2"></i>
+                      <h3 class="h2 mb-0">24/7</h3>
+                    </div>
+                    <h5 class="mb-2">Непрерывная работа</h5>
+                    <p class="mb-0">Заменяет человеческий мониторинг круглосуточно без перерывов и выходных</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Benefit 2 -->
+              <div class="swiper-slide h-auto pt-1">
+                <div class="card shadow-sm card-hover position-relative h-100 py-md-1 px-md-2">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                      <i class="bx bx-trending-down fs-1 text-primary me-2"></i>
+                      <h3 class="h2 mb-0">↓90%</h3>
+                    </div>
+                    <h5 class="mb-2">Минимальные затраты</h5>
+                    <p class="mb-0">Снижение операционных расходов на аналитику и мониторинг</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Benefit 3 -->
+              <div class="swiper-slide h-auto pt-1">
+                <div class="card shadow-sm card-hover position-relative h-100 py-md-1 px-md-2">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                      <i class="bx bx-bar-chart-alt-2 fs-1 text-primary me-2"></i>
+                      <h3 class="h2 mb-0">100%</h3>
+                    </div>
+                    <h5 class="mb-2">Работа с KPI</h5>
+                    <p class="mb-0">Полный контроль показателей и метрик эффективности</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Benefit 4 -->
+              <div class="swiper-slide h-auto pt-1">
+                <div class="card shadow-sm card-hover position-relative h-100 py-md-1 px-md-2">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                      <i class="bx bx-infinite fs-1 text-primary me-2"></i>
+                      <h3 class="h2 mb-0">∞</h3>
+                    </div>
+                    <h5 class="mb-2">Масштабируемость</h5>
+                    <p class="mb-0">Неограниченный рост возможностей и обработка любых объёмов данных</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Swiper pagination -->
+            <div class="swiper-pagination position-static mt-4 pt-lg-3 pt-2"></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Case Studies -->
+      <div id="cases" class="container my-5 py-lg-5 py-md-4 py-3">
+        <h2 class="h1 mb-md-4 mb-3 pt-xl-3">Успешные кейсы внедрения</h2>
+        <div class="row gy-sm-4 gy-3 mb-md-5 mb-4 pb-xl-2 pb-md-0 pb-sm-2">
+          <div class="col-md-6 col-12">
+            <p class="mb-0 fs-lg">Реальные результаты внедрения AiST Predict в компаниях среднего и крупного бизнеса с конкретными метриками эффективности</p>
+          </div>
+          <div class="col text-md-end">
+            <a href="#contact" class="btn btn-lg btn-outline-primary">Обсудить ваш проект</a>
+          </div>
+        </div>
+
+        <!-- Swiper slider -->
+        <div class="swiper mb-xl-3" data-swiper-options='{
+          "spaceBetween": 24,
+          "breakpoints": {
+            "0": {
+              "slidesPerView": 1
+            },
+            "768": {
+              "slidesPerView": 2
+            },
+            "1200": {
+              "slidesPerView": 3
+            }
+          },
+          "pagination": {
+            "el": ".swiper-pagination",
+            "clickable": true
+          }
+        }'>
+          <div class="swiper-wrapper">
+
+            <!-- Case 1 -->
+            <div class="swiper-slide h-auto pt-1">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="badge bg-primary mb-3">Производство</div>
+                  <h5 class="card-title mb-3">Производственная компания (500+ сотрудников)</h5>
+                  <p class="card-text mb-3 fs-sm"><strong>Задача:</strong> Мониторинг KPI отделов продаж и производства, анализ коммуникаций с клиентами</p>
+                  <hr class="my-3">
+                  <div class="row g-3 mb-3">
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">↓85%</div>
+                      <div class="fs-sm">Снижение времени на отчётность</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">+42%</div>
+                      <div class="fs-sm">Рост выявления проблемных сделок</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">↓67%</div>
+                      <div class="fs-sm">Время реакции на негатив</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">ROI 320%</div>
+                      <div class="fs-sm">За первый год</div>
+                    </div>
+                  </div>
+                  <a href="#contact" class="btn btn-outline-primary w-100 mt-2">Подробнее о кейсе</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="swiper-slide h-auto pt-1">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="badge bg-primary mb-3">Финансы</div>
+                  <h5 class="card-title mb-3">Финансовая корпорация (2000+ сотрудников)</h5>
+                  <p class="card-text mb-3 fs-sm"><strong>Задача:</strong> Анализ контрагентов, мониторинг рисков сделок, контроль комплаенса</p>
+                  <hr class="my-3">
+                  <div class="row g-3 mb-3">
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">24/7</div>
+                      <div class="fs-sm">Мониторинг транзакций</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">↓92%</div>
+                      <div class="fs-sm">Операционные расходы</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">+78%</div>
+                      <div class="fs-sm">Точность прогнозов</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">156</div>
+                      <div class="fs-sm">Рисков предотвращено</div>
+                    </div>
+                  </div>
+                  <a href="#contact" class="btn btn-outline-primary w-100 mt-2">Подробнее о кейсе</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Case 3 -->
+            <div class="swiper-slide h-auto pt-1">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="badge bg-primary mb-3">Логистика</div>
+                  <h5 class="card-title mb-3">Логистическая компания (800+ сотрудников)</h5>
+                  <p class="card-text mb-3 fs-sm"><strong>Задача:</strong> Анализ эффективности маршрутов, мониторинг качества обслуживания, обработка обратной связи</p>
+                  <hr class="my-3">
+                  <div class="row g-3 mb-3">
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">↓73%</div>
+                      <div class="fs-sm">Время анализа запросов</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">+35%</div>
+                      <div class="fs-sm">Скорость решений</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">↓88%</div>
+                      <div class="fs-sm">Ручной труд</div>
+                    </div>
+                    <div class="col-6">
+                      <div class="text-primary fw-bold h4 mb-1">8 мес</div>
+                      <div class="fs-sm">Окупаемость</div>
+                    </div>
+                  </div>
+                  <a href="#contact" class="btn btn-outline-primary w-100 mt-2">Подробнее о кейсе</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Swiper pagination -->
+          <div class="swiper-pagination position-static mt-4 pt-lg-3 pt-2"></div>
+        </div>
+      </div>
+
+
+      <!-- Pricing Section -->
+      <section id="pricing" class="container my-5 py-lg-5 py-md-4 py-3">
+        <h2 class="h1 mb-md-4 mb-3 text-center">Тарифы</h2>
+        <p class="text-muted mb-md-5 mb-4 pb-xl-3 pb-lg-2 pb-md-0 pb-sm-2 mx-auto text-center" style="max-width: 38rem;">Выберите оптимальный тариф для вашего бизнеса. Все тарифы включают техническую поддержку и регулярные обновления</p>
+
+        <div class="row gy-4">
+          <!-- Базовый тариф -->
+          <div class="col-lg-4">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body p-4">
+                <h3 class="h5 mb-2">Базовый</h3>
+                <p class="text-muted mb-4">Для небольших команд и старта работы</p>
+                <div class="mb-4 pb-3">
+                  <span class="h3 mb-0">По запросу</span>
+                </div>
+                <ul class="list-unstyled mb-4 pb-2">
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>До N запросов/месяц</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>1 канал интеграции</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Базовый мониторинг</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Email-поддержка</span>
+                  </li>
+                </ul>
+                <a href="#contact" class="btn btn-outline-primary w-100">Оставить заявку</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Профессиональный тариф -->
+          <div class="col-lg-4">
+            <div class="card h-100 border-primary shadow-lg position-relative">
+              <div class="position-absolute top-0 start-50 translate-middle">
+                <span class="badge bg-primary">Популярный</span>
+              </div>
+              <div class="card-body p-4">
+                <h3 class="h5 mb-2">Профессиональный</h3>
+                <p class="text-muted mb-4">Для среднего бизнеса с активными процессами</p>
+                <div class="mb-4 pb-3">
+                  <span class="h3 mb-0">По запросу</span>
+                  <span class="text-muted ms-2 fs-sm">/ месяц</span>
+                  <div class="text-muted fs-sm mt-1">Скидка 20% при годовой оплате</div>
+                </div>
+                <ul class="list-unstyled mb-4 pb-2">
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Неограниченные запросы</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>До 5 каналов интеграции</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Предиктивная аналитика</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Автоматизация действий</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Приоритетная поддержка</span>
+                  </li>
+                </ul>
+                <a href="#contact" class="btn btn-primary w-100">Оставить заявку</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Корпоративный тариф -->
+          <div class="col-lg-4">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body p-4">
+                <h3 class="h5 mb-2">Корпоративный</h3>
+                <p class="text-muted mb-4">Для крупного бизнеса с особыми требованиями</p>
+                <div class="mb-4 pb-3">
+                  <span class="h3 mb-0">Индивидуально</span>
+                </div>
+                <ul class="list-unstyled mb-4 pb-2">
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Всё из Профессионального</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Коробочное решение</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Офлайн-установка</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>3-4 коробки для отказоустойчивости</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>Персональный менеджер</span>
+                  </li>
+                  <li class="d-flex mb-2">
+                    <i class="bx bx-check text-primary fs-5 me-2"></i>
+                    <span>SLA гарантии</span>
+                  </li>
+                </ul>
+                <a href="#contact" class="btn btn-outline-primary w-100">Связаться с нами</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- What Our Clients Say About Us -->
+      <section class="container mb-5 pb-lg-5 pb-md-4 pb-3">
+        <div class="mb-xl-3">
+          <h2 class="h1 mb-md-5 mb-4 pb-xl-3 pb-lg-2 pb-md-0 pb-sm-2">Что говорят наши клиенты</h2>
+
+          <!-- Tabs -->
+          <div class="row gy-4 gx-md-4 gx-3">
+
+            <!-- Nav tabs -->
+            <div class="col-lg-4 col-sm-5 order-sm-1 order-2">
+              <ul class="nav nav-tabs flex-column" role="tablist">
+                <li class="nav-item mb-3">
+                  <a href="#testimonial-1" class="nav-link flex-md-row flex-sm-column align-items-md-center align-items-sm-start align-items-center p-md-4 p-3 rounded-3 fw-normal active" data-bs-toggle="tab" role="tab">
+                    <img src="assets/img/avatar/48.jpg" width="56" alt="Директор производственной компании" class="rounded-circle me-md-3 me-sm-0 me-3 mb-md-0 mb-sm-2">
+                    <div>
+                      <span class="d-block mb-0 fs-lg fw-semibold">Александр Петров</span>
+                      Директор производственной компании
+                    </div>
+                  </a>
+                </li>
+                <li class="nav-item mb-3">
+                  <a href="#testimonial-2" class="nav-link flex-md-row flex-sm-column align-items-md-center align-items-sm-start align-items-center p-md-4 p-3 rounded-3 fw-normal" data-bs-toggle="tab" role="tab">
+                    <img src="assets/img/avatar/49.jpg" width="56" alt="Вице-президент финансовой корпорации" class="rounded-circle me-md-3 me-sm-0 me-3 mb-md-0 mb-sm-2">
+                    <div>
+                      <span class="d-block mb-0 fs-lg fw-semibold">Елена Иванова</span>
+                      Вице-президент финансовой корпорации
+                    </div>
+                  </a>
+                </li>
+                <li class="nav-item mb-0">
+                  <a href="#testimonial-3" class="nav-link flex-md-row flex-sm-column align-items-md-center align-items-sm-start align-items-center p-md-4 p-3 rounded-3 fw-normal" data-bs-toggle="tab" role="tab">
+                    <img src="assets/img/avatar/50.jpg" width="56" alt="Основатель логистической компании" class="rounded-circle me-md-3 me-sm-0 me-3 mb-md-0 mb-sm-2">
+                    <div>
+                      <span class="d-block mb-0 fs-lg fw-semibold">Дмитрий Соколов</span>
+                      Основатель логистической компании
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tabs content -->
+            <div class="col-sm-7 offset-lg-1 order-sm-2 order-1">
+              <div class="tab-content ps-lg-0 ps-md-4">
+                <div class="tab-pane fade show active" id="testimonial-1" role="tabpanel">
+                  <h4 class="mb-3" style="max-width: 22.875rem;">"Система окупилась за год с ROI 320%"</h4>
+                  <div class="fs-sm text-nowrap">
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                  </div>
+                  <p class="mt-md-4 mt-3 pt-lg-3 pt-md-2 mb-0 fs-lg">AiST Predict помог нам снизить время на подготовку управленческой отчётности на 85%. Система автоматически анализирует KPI наших отделов, выявляет проблемные сделки и предупреждает о рисках. За первый год работы ROI составил 320%.</p>
+                </div>
+                <div class="tab-pane fade" id="testimonial-2" role="tabpanel">
+                  <h4 class="mb-3" style="max-width: 22.875rem;">"Предотвратили 156 рисковых ситуаций за полгода"</h4>
+                  <div class="fs-sm text-nowrap">
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                  </div>
+                  <p class="mt-md-4 mt-3 pt-lg-3 pt-md-2 mb-0 fs-lg">Внедрение AiST Predict позволило нам снизить операционные расходы на аналитику на 92%. Система работает 24/7, мониторит все транзакции и предупреждает о потенциальных проблемах. Точность прогнозирования рисков выросла на 78%.</p>
+                </div>
+                <div class="tab-pane fade" id="testimonial-3" role="tabpanel">
+                  <h4 class="mb-3" style="max-width: 22.875rem;">"Окупилось за 8 месяцев"</h4>
+                  <div class="fs-sm text-nowrap">
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                    <i class="bx bxs-star text-warning"></i>
+                  </div>
+                  <p class="mt-md-4 mt-3 pt-lg-3 pt-md-2 mb-0 fs-lg">Благодаря AiST Predict мы сократили время на анализ клиентских запросов на 73% и ускорили принятие решений по оптимизации логистики на 35%. Система окупилась всего за 8 месяцев, и мы продолжаем масштабировать её использование.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Contact CTA -->
+      <section id="contact" class="container">
+        <div class="position-relative bg-dark rounded-3 overflow-hidden py-5 px-4 px-sm-0">
+          <span class="position-absolute top-0 start-0 d-block w-100 h-100" style="background: radial-gradient(116.18% 118% at 50% 100%, rgba(99, 102, 241, 0.1) 0%, rgba(218, 70, 239, 0.05) 41.83%, rgba(241, 244, 253, 0.07) 82.52%);"></span>
+          <div class="position-relative row justify-content-center py-sm-2 py-lg-5">
+            <div class="col-xl-6 col-lg-7 col-md-8 col-sm-10 text-center">
+              <h2 class="h1 text-light mb-4">Готовы начать?</h2>
+              <p class="fs-lg text-light opacity-70 pb-4 mb-3">Оставьте свой email, и мы свяжемся с вами для обсуждения вашего проекта</p>
+
+              <!-- Desktop form -->
+              <form class="input-group input-group-lg d-none d-sm-flex needs-validation mb-3" novalidate>
+                <input type="email" class="form-control rounded-start ps-5" placeholder="Ваш email" required>
+                <i class="bx bx-envelope fs-lg text-muted position-absolute top-50 start-0 translate-middle-y ms-3 zindex-5"></i>
+                <div class="invalid-tooltip position-absolute top-100 start-0">Пожалуйста, укажите корректный email.</div>
+                <button type="submit" class="btn btn-primary">Связаться с нами</button>
+              </form>
+
+              <!-- Mobile form -->
+              <form class="needs-validation d-sm-none mb-3" novalidate>
+                <div class="position-relative mb-3">
+                  <input type="email" class="form-control form-control-lg rounded-start ps-5" placeholder="Ваш email" required>
+                  <i class="bx bx-envelope fs-lg text-muted position-absolute top-50 start-0 translate-middle-y ms-3 zindex-5"></i>
+                  <div class="invalid-tooltip position-absolute top-0 start-0 mt-n4">Пожалуйста, укажите корректный email.</div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100">Связаться с нами</button>
+              </form>
+              <p class="fs-sm text-light opacity-50 mb-0">Никаких скрытых платежей. Гибкие условия. Прозрачное ценообразование.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer pt-5 pb-4 pb-lg-5">
+      <div class="container pt-lg-4">
+        <div class="row pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+              <img src="assets/img/logo.svg" width="47" alt="AiST">
+              AiST
+            </div>
+            <p class="fs-sm pb-lg-3 mb-4">Универсальный AI-ассистент для мониторинга, анализа и автоматизации бизнес-процессов. Безграничные возможности предиктивной аналитики и мониторинга данных 24/7.</p>
+            <form class="needs-validation" novalidate>
+              <label for="subscr-email" class="form-label">Подписаться на новости</label>
+              <div class="input-group">
+                <input type="email" id="subscr-email" class="form-control rounded-start ps-5" placeholder="Ваш email" required>
+                <i class="bx bx-envelope fs-lg text-muted position-absolute top-50 start-0 translate-middle-y ms-3 zindex-5"></i>
+                <div class="invalid-tooltip position-absolute top-100 start-0">Пожалуйста, укажите корректный email.</div>
+                <button type="submit" class="btn btn-primary">Подписаться</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0">
+            <div id="footer-links" class="row">
+              <div class="col-lg-4">
+                <h6 class="mb-2">
+                  <a href="#useful-links" class="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Навигация</a>
+                </h6>
+                <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                  <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Главная</a></li>
+                    <li class="nav-item"><a href="#features" class="nav-link d-inline-block px-0 pt-1 pb-2">Возможности</a></li>
+                    <li class="nav-item"><a href="#cases" class="nav-link d-inline-block px-0 pt-1 pb-2">Кейсы</a></li>
+                    <li class="nav-item"><a href="#pricing" class="nav-link d-inline-block px-0 pt-1 pb-2">Тарифы</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link d-inline-block px-0 pt-1 pb-2">Контакты</a></li>
+                  </ul>
+                  <ul class="nav flex-column mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Условия использования</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Политика конфиденциальности</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-3">
+                <h6 class="mb-2">
+                  <a href="#social-links" class="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Соцсети</a>
+                </h6>
+                <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                  <ul class="nav flex-column mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">VK</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Telegram</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">LinkedIn</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">YouTube</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
+                <h6 class="mb-2">Свяжитесь с нами</h6>
+                <a href="mailto:info@aist-predict.ru" class="fw-medium">info@aist-predict.ru</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
+          <span class="text-muted">&copy; 2024 AiST. Все права защищены.</span>
+        </p>
+      </div>
+    </footer>
+
+
+    <!-- Back to top button -->
+    <a href="#top" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Наверх</span>
+      <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+    </a>
+
+
+    <!-- Vendor Scripts -->
+    <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
+    <script src="assets/vendor/rellax/rellax.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main Theme Script -->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>
