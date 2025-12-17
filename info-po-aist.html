@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ru" class="" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- SEO Meta Tags -->
+    <title>AiST Ai | Лучший Ai-помощник</title>
+    <meta name="description" content="Самые продвинутые Ai-модели в одном приложении. Помощь в учебе и работе, умная обработка файлов, генерация картинок по вашим идеям, поисковые суперспособности — всё в одном современном суперприложении!">
+
+    <meta name="keywords" content="AI-помощник, искусственный интеллект, нейросеть, умный ассистент, AI-сервис, AI-приложение, AI для учебы, AI для работы, AI для бизнеса, AI для студентов, AI для преподавателей, обработка PDF, анализ документов, генерация текстов, создание рефератов, анализ Excel, обработка таблиц, создание отчетов, генерация изображений, создание иллюстраций, визуальный контент, AI-дизайн, презентации с AI, AI для маркетинга, онлайн-поиск, поиск в интернете, AI-чат, AI-бот, поддержка пользователей, студенты, преподаватели, маркетологи, аналитики, контент-криэйторы, фрилансеры">
+    <meta name="author" content="AiST Ai">
+
+    <!-- Theme switcher (color modes) -->
+    <script src="https://aist-ai.com/themes/aitheme/assets/js/theme-switcher_.js?ver=1.3.3"></script>
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://aist-ai.com/themes/aitheme/assets/favicon/apple-touch-icon.png?ver=1.3.3">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://aist-ai.com/themes/aitheme/assets/favicon/favicon-32x32.png?ver=1.3.3">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://aist-ai.com/themes/aitheme/assets/favicon/favicon-16x16.png?ver=1.3.3">
+    <link rel="manifest" href="https://aist-ai.com/themes/aitheme/assets/favicon/site.webmanifest?ver=1.3.3">
+    <link rel="mask-icon" href="https://aist-ai.com/themes/aitheme/assets/favicon/safari-pinned-tab.svg?ver=1.3.3" color="#6366f1">
+    <link rel="shortcut icon" href="https://aist-ai.com/themes/aitheme/assets/favicon/favicon.ico?ver=1.3.3">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="https://aist-ai.com/themes/aitheme/assets/favicon/browserconfig.xm?ver=1.3.3">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@thesimstree">
+    <meta name="twitter:title" content="AiST Ai | Лучший Ai-помощник">
+    <meta name="twitter:description" content="Самые продвинутые Ai-модели в одном приложении. Помощь в учебе и работе, умная обработка файлов, генерация картинок по вашим идеям, поисковые суперспособности — всё в одном современном суперприложении!">
+    <meta name="twitter:image" content="https://aist-ai.com/themes/aitheme/assets/img/theme/landing/saas-4/hero-img.jpg?ver=1.3.3">
+
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="https://aist-ai.com/themes/aitheme/assets/vendor/theme/boxicons/css/boxicons.min.css?ver=1.3.3">
+    <link rel="stylesheet" media="screen" href="https://aist-ai.com/themes/aitheme/assets/vendor/theme/swiper/swiper-bundle.min.css?ver=1.3.3">
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="https://aist-ai.com/themes/aitheme/assets/css/theme/theme.min.css?ver=1.3.3">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      [data-bs-theme="dark"] .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      [data-bs-theme="dark"] .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      [data-bs-theme="dark"] .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1000);
+        };
+      })();
+    </script>
+
+    <!-- Код пикселя от stepFORM -->
+    <script defer src="https://stepform.io/notify/pixel/p84p1urc0w2zhzplk1zqqglukigt7uhn"></script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}
+      m[i].l=1*new Date()
+      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+      ym(101750408, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/101750408" style="position:absolute; left:-9999px;" alt=""/></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+  </head>
+  <body>
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+
+    <main class="page-wrapper">
+
+      <header class="header navbar navbar-expand-lg position-absolute navbar-sticky">
+        <div class="container px-3">
+          <a href="https://aist-ai.com" class="navbar-brand pe-4">
+            <img src="https://aist-ai.com/themes/aitheme/assets/img/theme/logo.svg?ver=1.3.3" width="44" alt="Silicon"> AiST Ai
+          </a>
+          <div id="navbarNav" class="offcanvas offcanvas-end">
+            <div class="offcanvas-header border-bottom">
+              <h5 class="offcanvas-title">Menu</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a href="#features" class="nav-link" data-scroll data-scroll-offset="120" aria-label="Возможности">Возможности</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#test" class="nav-link" data-scroll data-scroll-offset="120" aria-label="Отзывы">Отзывы</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#faq" class="nav-link" data-scroll data-scroll-offset="120" aria-label="FAQ">FAQ</a>
+                </li>
+              </ul>
+            </div>
+            <div class="offcanvas-header border-top">
+              <a href="https://chat.aist-ai.com" class="btn btn-primary w-100" target="_blank" rel="noopener">Начать сейчас</a>
+            </div>
+          </div>
+
+          <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4 data-bs-toggle-mode" data-bs-toggle="mode">
+            <input type="checkbox" class="form-check-input" id="theme-mode">
+          </div>
+          <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a href="https://chat.aist-ai.com" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+            Начать сейчас
+          </a>
+        </div>
+      </header>
+
+      <!-- ЗАМЕНЁННЫЙ КОНТЕНТ -->
+      <section class="position-relative pt-5 overflow-hidden">
+        <div class="container position-relative mt-5 pt-xl-5 pt-md-3 zindex-5">
+
+          <h1>Информация о ПО «AIST AI»</h1>
+
+          <h2>1. Описание ПО</h2>
+          <p>Программное обеспечение является каталогом ассистентов ИИ. Областью применения программного продукта Aist Ai является сфера поддержки клиентов через онлайн-чаты с быстрым поиском информации и автоматизацией ответов:</p>
+          <ul>
+            <li>рекомендация товаров в электронной коммерции;</li>
+            <li>консультант по продуктам в сфере банковских услуг;</li>
+            <li>услуг ЖКХ;</li>
+            <li>юридических услуг;</li>
+            <li>личные помощники в планировании времени, приёме лекарств;</li>
+            <li>обучение, например, как онлайн‑помощник по математике или иностранному языку;</li>
+            <li>создание графических материалов;</li>
+            <li>собеседник, например, для помощи в поиске рецепта для приготовления блюд;</li>
+            <li>помощник в подготовке маркетинговых материалов;</li>
+            <li>онлайн‑переводчик с разных языков;</li>
+            <li>генератор графических материалов;</li>
+            <li>онлайн‑поиск информации;</li>
+            <li>SMM‑менеджер;</li>
+            <li>HR‑менеджер;</li>
+            <li>помощник в написании кода для программистов;</li>
+            <li>психологическая помощь;</li>
+            <li>помощник в кулинарии.</li>
+          </ul>
+
+          <h2>2. Информация о стоимости использования продукта</h2>
+          <p>Стоимость использования (лицензионное вознаграждение) ПО «AIST AI» указана на сайте в разделе «Тарифы».</p>
+          <p>Контакт для расчёта стоимости индивидуальных тарифов: <a href="mailto:info@nris.ru">info@nris.ru</a></p>
+
+          <h2>3. ПО «AIST AI»</h2>
+          <p>ООО «Деасофт» принадлежит исключительное право на ПО «AIST AI», включено в Единый реестр российских программ для ЭВМ и баз данных (Реестровая запись № 9948 от 25.03.2021. Произведена на основании приказа Министерства цифрового развития, связи и массовых коммуникаций Российской Федерации от 25.03.2021 № 175).</p>
+          <p><strong>Правообладатель:</strong> ООО «Деасофт»</p>
+          <p><strong>Адрес места нахождения:</strong> 197341, Санкт‑Петербург, п. Парголово, ул. Заречная, д. 35, к. 1, кв. 82</p>
+          <p><strong>ИНН:</strong> 7814189196</p>
+          <p><strong>Основной ОКВЭД:</strong> 62.01 Разработка компьютерного программного обеспечения</p>
+          <p><strong>Виды деятельности в области ИТ:</strong> 2.01 Реализация программ для ЭВМ, баз данных (включая их обновления и изменения), средств защиты информации, в том числе путём отчуждения прав, предоставления прав (лицензирования), предоставления удалённого доступа посредством информационно‑телекоммуникационных сетей, включая информационно‑телекоммуникационную сеть «Интернет», предоставления удалённых вычислительных мощностей, эмулирующих физическое оборудование, копирования, оптовой и розничной продажи экземпляров программ для ЭВМ, баз данных, издание сборников программ для ЭВМ и баз данных, предоставление экземпляров программ для ЭВМ, баз данных в лизинг, аренду (прокат).</p>
+
+          <h2>4. Функциональные характеристики ПО «AIST AI»</h2>
+          <p>Функциональные характеристики ПО.</p>
+
+          <h2>5. Инструкция по эксплуатации ПО «AIST AI»</h2>
+          <p>Инструкция по эксплуатации.</p>
+
+          <h2>6. Технологический стек ПО «AIST AI»</h2>
+          <p><strong>Языки программирования и фреймворки:</strong> PHP (Laravel), JavaScript (TypeScript, Node.js, Nuxt), HTML, CSS (Tailwind)</p>
+          <p><strong>Системы хранения данных:</strong> PostgreSQL</p>
+          <p><strong>Инфраструктура и развертывание:</strong> Debian, Docker, CI/CD, Kubernetes</p>
+
+          <h2>7. Прочее ПО АО «AIST AI»</h2>
+          <p>АО «AIST AI» принадлежит исключительное право на следующие программные обеспечения:</p>
+          <ul>
+            <li>ПО «АНТИПИРАТ» (ПО «Защита ОИС в цифровой среде», «Антипиратское ПО»), включено в Единый реестр российских программ для ЭВМ и баз данных (Реестровая запись № 10558 от 17.05.2021. Произведена на основании приказа Министерства цифрового развития, связи и массовых коммуникаций Российской Федерации от 17.05.2021 № 460). Расположено по ссылке <a href="https://antipirat.ru" target="_blank" rel="noopener">antipirat.ru</a>;</li>
+            <li>«Всероссийская платформа ХУДОЖНИКИ/ARTISTS». Расположена по ссылке <a href="https://художники.рф" target="_blank" rel="noopener">художники.рф</a>.</li>
+          </ul>
+          <p>Предоставление права на использование указанных программ предоставляется в соответствии с документацией, расположенной на сайтах <a href="https://antipirat.ru" target="_blank" rel="noopener">antipirat.ru</a> и <a href="https://художники.рф" target="_blank" rel="noopener">художники.рф</a>.</p>
+
+        </div>
+      </section>
+      <!-- /ЗАМЕНЁННЫЙ КОНТЕНТ -->
+
+    </main>
+
+    <footer class="footer pt-5 pb-4 pb-lg-5">
+      <div class="container text-center pt-lg-3">
+        <div class="navbar-brand justify-content-center text-dark mb-2 mb-lg-4">
+          <img src="https://aist-ai.com/themes/aitheme/assets/img/theme/logo.svg?ver=1.3.3" class="me-2" width="60" alt="Silicon">
+          <span class="fs-4">AiST Ai</span>
+        </div>
+        <ul class="nav justify-content-center pt-3 pb-4 pb-lg-5">
+          <li class="nav-item"><a target="_blank" href="https://aist-ai.com/storage/app/media/docs/license.pdf" class="nav-link">Лицензионное соглашение</a></li>
+          <li class="nav-item"><a target="_blank" href="https://aist-ai.com/policy" class="nav-link">Политика конфиденциальности</a></li>
+          <li class="nav-item"><a target="_blank" href="https://aist-ai.com/storage/app/media/docs/personal.pdf" class="nav-link">Положение об обработке персональных данных</a></li>
+        </ul>
+        <p class="nav d-block fs-sm text-center pt-5 mt-lg-4 mb-0">
+          <span class="opacity-80">© Все права защищены.</span>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#top" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+      <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+    </a>
+
+    <!-- Vendor Scripts -->
+    <script src="https://aist-ai.com/themes/aitheme/assets/vendor/theme/parallax-js/dist/parallax.min.js?ver=1.3.3"></script>
+    <script src="https://aist-ai.com/themes/aitheme/assets/vendor/theme/rellax/rellax.min.js?ver=1.3.3"></script>
+    <script src="https://aist-ai.com/themes/aitheme/assets/vendor/theme/swiper/swiper-bundle.min.js?ver=1.3.3"></script>
+
+    <!-- Main Theme Script -->
+    <script src="https://aist-ai.com/themes/aitheme/assets/js/theme/theme.min.js?ver=1.3.3"></script>
+
+    <script crossorigin src="https://aist-ai.com/themes/aitheme/assets/js/jquery-3.4.0.min.js"></script>
+    <script src="https://aist-ai.com/themes/aitheme/assets/js/kookie.js"></script>
+    <script>
+      function serialize(obj) {
+        var str = [];
+        var only_pl = true;
+        for (var p in obj) {
+          if (encodeURIComponent(obj[p]) != null && encodeURIComponent(obj[p]) !== "") {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            if (encodeURIComponent(p) != 'pl') {
+              only_pl = false;
+            }
+          }
+        }
+        var return_str = str.join("&");
+        if (only_pl) {
+          return_str = '';
+        }
+        return return_str;
+      }
+
+      function updateURL(url) {
+        if (history.pushState) {
+          var baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+          var newUrl = baseUrl;
+          if (url != null && url !== "") {
+            newUrl = baseUrl + '?' + url;
+          }
+          history.pushState(null, null, newUrl);
+        } else {
+          console.warn('History API не поддерживается');
+        }
+      }
+
+      $(document).on('click', '#more_bb', function(event) {
+        var attr = $(this).attr('data-v');
+        if (typeof attr !== 'undefined' && attr !== false) {
+          makeFiltration($(this).attr("data-v"));
+        }
+      });
+      $(document).on('click', '.cat_fp', function(event) {
+        $('.active').removeClass('active');
+        $(this).addClass('active');
+        makeFiltration();
+      });
+
+      $(".search_fb").each(function(index) {
+        $(this).on('propertychange change keyup input paste', function() {
+          makeFiltration();
+        });
+      });
+
+      function makeFiltration(p_paginate = 1) {
+        let searchVsear = ''
+        try {
+          if ($('#q_bb').val().length >= 2) {
+            searchVsear = $('#q_bb').val().trim();
+            console.log(searchVsear);
+          }
+        } catch (e) {}
+
+        let catVar = 0
+        try {
+          var element = $('.cat_fp.active');
+          if (element.length > 0) {
+            catVar = element.attr('data-v');
+          }
+        } catch (e) {}
+        var data = {
+          'q': searchVsear,
+          'category': catVar,
+          'pagePaginate': p_paginate,
+        }
+
+        if (catVar > 0) {
+          var dataUrl = {
+            'category': catVar,
+          }
+        } else {
+          var dataUrl = {}
+        }
+        var url = serialize(dataUrl);
+
+        updateURL(url);
+
+        $.request('MainFunctions::onFilterPosts', {
+          data: data
+        });
+      }
+
+      $(document).on('click', '#more_b', function(event) {
+        var attr = $(this).attr('data-v');
+        if (typeof attr !== 'undefined' && attr !== false) {
+          $.request('MainFunctions::onFilter', {
+            data: {
+              'pagePaginate': $(this).attr("data-v"),
+            }
+          });
+        }
+      });
+
+      $(".search_f").each(function(index) {
+        $(this).on('propertychange change keyup input paste', function() {
+
+          let searchVsear = ''
+          if ($(this).val().length >= 2) {
+            searchVsear = $(this).val().trim();
+            console.log(searchVsear);
+          }
+          $.request('MainFunctions::onFilterAssists', {
+            data: {
+              'q': searchVsear,
+            }
+          });
+        });
+      });
+    </script>
+
+    <script crossorigin src="https://aist-ai.com/themes/aitheme/assets/js/jquery-3.4.0.min.js?ver=1.3.3"></script>
+    <script src="/modules/system/assets/js/framework-extras.js"></script>
+    <link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework-extras.css">
+  </body>
+</html>
