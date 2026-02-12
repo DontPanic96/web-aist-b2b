@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <title>AiST JetStream — корпоративный AI Gateway (SaaS / On‑prem)</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AiST JetStream — корпоративная платформа (AI Gateway) для управляемого доступа к LLM с контролем затрат, данных и политик генерации. Варианты поставки: SaaS или On‑prem.">
+    <meta name="keywords" content="AI Gateway, LLM, корпоративный AI, контроль затрат, API ключи, виртуальные ключи, RBAC, персональные данные, трансграничная передача ПД, on-prem, SaaS, AiST JetStream">
+    <meta name="author" content="AiST">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Theme switcher (color modes) -->
+    <script src="assets/js/theme-switcher.js"></script>
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#6366f1">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css">
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery/css/lightgallery-bundle.min.css">
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      [data-bs-theme="dark"] .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      [data-bs-theme="dark"] .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      [data-bs-theme="dark"] .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+      }
+      @keyframes spinner {
+        100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+      }
+    </style>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1000);
+        };
+      })();
+    </script>
+  </head>
+
+  <body id="top">
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Загрузка...</span>
+      </div>
+    </div>
+
+    <main class="page-wrapper">
+
+      <!-- Navbar -->
+      <header class="header navbar navbar-expand-lg navbar-dark position-absolute navbar-sticky">
+        <div class="container px-3">
+          <a href="#top" class="navbar-brand pe-3">
+            <img src="assets/img/logo.svg" width="47" alt="AiST">
+            AiST JetStream
+          </a>
+
+          <div class="d-flex align-items-center ms-auto">
+            <!-- Theme Switcher -->
+            <div class="pe-lg-2 me-4" data-bs-theme="dark">
+              <div class="form-check form-switch mode-switch" data-bs-toggle="mode">
+                <input type="checkbox" class="form-check-input" id="theme-mode">
+                <label class="form-check-label d-none d-sm-block" for="theme-mode">Light</label>
+                <label class="form-check-label d-none d-sm-block" for="theme-mode">Dark</label>
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="#request-demo" class="btn btn-primary bg-gradient-primary border-0 rounded-pill" data-scroll>
+              Запросить демо
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero section -->
+      <section class="position-relative bg-dark pt-lg-4 pt-xl-5" style="background: linear-gradient(90deg, #0B0F19 0%, #172033 51.04%, #0B0F19 100%);">
+        <div class="jarallax position-absolute top-0 start-0 w-100 h-100" data-jarallax data-speed="0.4">
+          <div class="jarallax-img" style="background-image: url(assets/img/landing/saas-5/hero-bg-pattern.png);"></div>
+        </div>
+
+        <div class="container position-relative zindex-2 pt-2 pt-sm-4 pt-md-5">
+          <div class="row justify-content-center pt-5">
+            <div class="col-lg-10 col-xl-9 text-center pt-5 mt-1">
+              <div class="d-inline-flex align-items-center fs-sm fw-semibold text-decoration-none border border-primary border-opacity-50 rounded-pill py-1 px-3">
+                <span class="text-gradient-primary lh-lg">AiST JetStream</span>
+                <i class="bx bx-right-arrow-alt text-gradient-primary fs-lg ms-2 me-n1"></i>
+              </div>
+
+              <h1 class="display-4 text-white pt-3 mt-3 mb-4">
+                Корпоративный доступ к LLM с контролем данных, затрат и политик генерации
+              </h1>
+
+              <p class="text-white opacity-70 fs-xl mb-4">
+                <b>AiST JetStream</b> — AI Gateway для компаний, которым нужен управляемый контур использования LLM:
+                единая точка интеграции, виртуальные ключи и лимиты, централизованные политики по данным и параметрам генерации,
+                прозрачная аналитика расходов.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-none d-lg-block" style="height: 480px;"></div>
+        <div class="d-lg-none" style="height: 400px;"></div>
+
+        <div class="d-flex position-absolute bottom-0 start-0 w-100 overflow-hidden mb-n1" style="color: var(--si-body-bg);">
+          <div class="position-relative start-50 translate-middle-x flex-shrink-0" style="width: 3774px;">
+            <svg width="3774" height="201" viewBox="0 0 3774 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 200.003C0 200.003 1137.52 0.188224 1873.5 0.000134392C2614.84 -0.189325 3774 200.003 3774 200.003H0Z" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categories (Slider) -->
+      <section class="container position-relative zindex-3">
+        <div class="d-none d-lg-block" style="margin-top: -428px;"></div>
+        <div class=" d-lg-none" style="margin-top: -370px;"></div>
+        <div class="swiper" data-swiper-options='{
+          "slidesPerView": 1,
+          "spaceBetween": 24,
+          "pagination": {
+            "el": ".swiper-pagination",
+            "clickable": true
+          },
+          "breakpoints": {
+            "560": {
+              "slidesPerView": 2
+            },
+            "960": {
+              "slidesPerView": 3
+            },
+            "1200": {
+              "slidesPerView": 4
+            }
+          }
+        }'>
+          <div class="swiper-wrapper">
+
+            <!-- Item 1: OpenAI-совместимый API -->
+            <div class="swiper-slide">
+              <div class="card-portfolio position-relative d-block rounded-3 overflow-hidden" style="cursor: default;">
+                <span class="position-absolute top-0 start-0 w-100 h-100 zindex-1" style="background: linear-gradient(180deg, rgba(17, 24, 39, 0.00) 35.56%, #111827 95.3%);"></span>
+                <div class="position-absolute bottom-0 w-100 zindex-2 p-4">
+                  <div class="px-md-3">
+                    <h3 class="h5 text-white mb-2">OpenAI-совместимый API</h3>
+                    <div class="card-portfolio-meta d-flex align-items-center">
+                      <span class="text-white fs-sm opacity-70">Замена одной строки кода для интеграции</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-img">
+                  <img src="assets/img/landing/saas-5/categories/programming.jpg" alt="OpenAI API">
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2: Лимиты, бюджеты, аудит -->
+            <div class="swiper-slide">
+              <div class="card-portfolio position-relative d-block rounded-3 overflow-hidden" style="cursor: default;">
+                <span class="position-absolute top-0 start-0 w-100 h-100 zindex-1" style="background: linear-gradient(180deg, rgba(17, 24, 39, 0.00) 35.56%, #111827 95.3%);"></span>
+                <div class="position-absolute bottom-0 w-100 zindex-2 p-4">
+                  <div class="px-md-3">
+                    <h3 class="h5 text-white mb-2">Лимиты, бюджеты, аудит</h3>
+                    <div class="card-portfolio-meta d-flex align-items-center">
+                      <span class="text-white fs-sm opacity-70">Полный контроль расходов и транзакций</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-img">
+                  <img src="assets/img/landing/saas-5/categories/ecommerce.jpg" alt="Контроль бюджета">
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3: Маршрутизация по моделям -->
+            <div class="swiper-slide">
+              <div class="card-portfolio position-relative d-block rounded-3 overflow-hidden" style="cursor: default;">
+                <span class="position-absolute top-0 start-0 w-100 h-100 zindex-1" style="background: linear-gradient(180deg, rgba(17, 24, 39, 0.00) 35.56%, #111827 95.3%);"></span>
+                <div class="position-absolute bottom-0 w-100 zindex-2 p-4">
+                  <div class="px-md-3">
+                    <h3 class="h5 text-white mb-2">Маршрутизация по моделям</h3>
+                    <div class="card-portfolio-meta d-flex align-items-center">
+                      <span class="text-white fs-sm opacity-70">Гибкий выбор LLM-провайдеров и моделей</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-img">
+                  <img src="assets/img/landing/saas-5/categories/transportation.jpg" alt="Маршрутизация">
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 4: Политики ПД, соответствие 152ФЗ -->
+            <div class="swiper-slide">
+              <div class="card-portfolio position-relative d-block rounded-3 overflow-hidden" style="cursor: default;">
+                <span class="position-absolute top-0 start-0 w-100 h-100 zindex-1" style="background: linear-gradient(180deg, rgba(17, 24, 39, 0.00) 35.56%, #111827 95.3%);"></span>
+                <div class="position-absolute bottom-0 w-100 zindex-2 p-4">
+                  <div class="px-md-3">
+                    <h3 class="h5 text-white mb-2">Политики ПД, соответствие 152ФЗ</h3>
+                    <div class="card-portfolio-meta d-flex align-items-center">
+                      <span class="text-white fs-sm opacity-70">Защита данных и соответствие требованиям</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-img">
+                  <img src="assets/img/landing/saas-5/categories/marketing.jpg" alt="Безопасность данных">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pagination (bullets) -->
+          <div class="swiper-pagination position-relative bottom-0 pt-2 pt-md-3 mt-4"></div>
+        </div>
+      </section>
+
+      <!-- Problems Section -->
+      <section class="position-relative overflow-hidden py-5" id="problems">
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-dark-mode-none" style="background: linear-gradient(141deg, rgba(255, 255, 255, .01) 17.3%, #F3F6FF 78.21%);"></span>
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-none d-dark-mode-block" style="background: linear-gradient(141deg, rgba(11, 15, 25, .01) 17.3%, rgba(255, 255, 255, .04) 78.21%);"></div>
+
+        <div class="container position-relative zindex-2 pt-2 pt-sm-3 pt-md-4 pt-lg-5 mt-xl-3">
+          <h2 class="h1 text-center pb-1 mb-2">С какими проблемами сталкиваются компании</h2>
+          <p class="fs-lg text-center pb-lg-2 mb-0">Современные вызовы при работе с LLM-сервисами</p>
+
+          <!-- Problem 1: Закупка и управление ключами -->
+          <div class="row align-items-center justify-content-center py-4 py-md-5 my-1 my-sm-3 my-md-0 my-xl-3">
+            <div class="col-md-5 col-xl-4 offset-xl-1 order-md-1 text-center text-md-start">
+              <h3 class="h2 mb-lg-4">Процесс закупки и управления ключами LLM</h3>
+              <p class="fs-lg pb-lg-2 mb-4">Компании сталкиваются с множественными сложностями при работе с различными LLM-провайдерами из-за отсутствия единой точки контроля.</p>
+              <ul class="list-unstyled mb-4">
+                <li class="d-flex mb-2">
+                  <span>Уход с рынка РФ мировых поставщиков LLM</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Невозможность оплачивать сервисы рублями</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Сложность контроля: у каждого провайдера свой биллинг</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Сложное ценообразование — множество моделей, постоянные изменения тарифов</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Отсутствие прозрачности затрат</span>
+                </li>
+              </ul>
+              <a href="#solution" class="btn btn-outline-primary rounded-pill" data-scroll>
+                Узнать решение
+                <i class="bx bx-right-arrow-alt fs-lg ms-2 me-n1"></i>
+              </a>
+            </div>
+            <div class="col-11 col-sm-9 col-md-7 col-lg-6 pb-2 pb-sm-3 pb-md-0 mb-4 mb-md-0">
+              <div class="parallax" style="max-width: 636px; transform: translate3d(0px, 0px, 0px) rotate(0.0001deg); transform-style: preserve-3d; backface-visibility: hidden; pointer-events: none;">
+                <div class="parallax-layer" data-depth="0.05" style="transform: translate3d(-3.2px, -1.2px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: relative; display: block; left: 0px; top: 0px;">
+                  <img src="assets/img/landing/saas-5/use-cases/task-automation/circle-1.png" alt="Circle 1">
+                </div>
+                <div class="parallax-layer" data-depth="0.1" style="transform: translate3d(-6.3px, -2.5px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;">
+                  <img src="assets/img/landing/saas-5/use-cases/task-automation/circle-2.png" alt="Circle 2">
+                </div>
+                <div class="parallax-layer" data-depth="0.15" style="transform: translate3d(-9.5px, -3.7px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;">
+                  <img src="assets/img/landing/saas-5/use-cases/task-automation/circle-3.png" alt="Circle 3">
+                </div>
+                <div class="parallax-layer" data-depth="0.2" style="transform: translate3d(-12.7px, -4.9px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;">
+                  <div class="position-absolute top-50 start-50 translate-middle bg-primary rounded-circle shadow-primary p-4">
+                    <div class="h1 text-white lh-1 p-sm-1 p-lg-3 m-1">AI</div>
+                  </div>
+                </div>
+                <div class="parallax-layer" style="padding-right: 28.7%; padding-left: 57%; transform: translate3d(-19px, -7.4px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;" data-depth="0.3">
+                  <div class="position-relative">
+                    <div class="ratio ratio-1x1"></div>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-circle d-dark-mode-none" style="box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .35);"></span>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle d-none d-dark-mode-block" style="background-color: #212435;"></span>
+                    <img src="assets/img/icons/ai-companies/openai.svg" class="position-absolute top-0 start-0 w-100 h-100 p-3" alt="OpenAI">
+                  </div>
+                </div>
+                <div class="parallax-layer" style="padding-right: 60%; padding-left: 27.6%; transform: translate3d(-28.5px, -11.1px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;" data-depth="0.45">
+                  <div class="position-relative" style="top: 13.3%;">
+                    <div class="ratio ratio-1x1"></div>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-circle d-dark-mode-none" style="box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .35);"></span>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle d-none d-dark-mode-block" style="background-color: #212435;"></span>
+                    <img src="assets/img/icons/ai-companies/anthropic.svg" class="position-absolute top-0 start-0 w-100 h-100 p-3" alt="Anthropic">
+                  </div>
+                </div>
+                <div class="parallax-layer" style="padding-right: 85.8%; transform: translate3d(-19px, -7.4px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;" data-depth="0.3">
+                  <div class="position-relative" style="top: 32.7%;">
+                    <div class="ratio ratio-1x1"></div>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-circle d-dark-mode-none" style="box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .35);"></span>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle d-none d-dark-mode-block" style="background-color: #212435;"></span>
+                    <img src="assets/img/icons/ai-companies/google-ai.svg" class="position-absolute top-0 start-0 w-100 h-100 p-3" alt="Google AI">
+                  </div>
+                </div>
+                <div class="parallax-layer" style="padding-left: 85.8%; transform: translate3d(-15.8px, -6.2px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;" data-depth="0.25">
+                  <div class="position-relative" style="top: 35.5%;">
+                    <div class="ratio ratio-1x1"></div>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-circle d-dark-mode-none" style="box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .35);"></span>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle d-none d-dark-mode-block" style="background-color: #212435;"></span>
+                    <img src="assets/img/icons/ai-companies/gigachat.svg" class="position-absolute top-0 start-0 w-100 h-100 p-3" alt="GigaChat">
+                  </div>
+                </div>
+                <div class="parallax-layer" style="padding-right: 27.8%; padding-left: 62.9%; transform: translate3d(-22.1px, -8.6px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;" data-depth="0.35">
+                  <div class="position-relative" style="top: 30.7%;">
+                    <div class="ratio ratio-1x1"></div>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-circle d-dark-mode-none" style="box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .45);"></span>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle d-none d-dark-mode-block" style="background-color: #212435;"></span>
+                    <img src="assets/img/icons/ai-companies/alice-ai.svg" class="position-absolute top-0 start-0 w-100 h-100 p-3" alt="Alice AI">
+                  </div>
+                </div>
+                <div class="parallax-layer" style="padding-right: 45%; padding-left: 45%; transform: translate3d(-28.5px, -11.1px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;" data-depth="0.45">
+                  <div class="position-relative" style="top: 73.5%;">
+                    <div class="ratio ratio-1x1"></div>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-circle d-dark-mode-none" style="box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .45);"></span>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle d-none d-dark-mode-block" style="background-color: #212435;"></span>
+                    <img src="assets/img/icons/ai-companies/mistral-ai.svg" class="position-absolute top-0 start-0 w-100 h-100 p-3" alt="Mistral AI">
+                  </div>
+                </div>
+                <div class="parallax-layer" style="padding-right: 73.3%; padding-left: 11.1%; transform: translate3d(-15.8px, -6.2px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;" data-depth="0.25">
+                  <div class="position-relative" style="top: 78.8%;">
+                    <div class="ratio ratio-1x1"></div>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-circle d-dark-mode-none" style="box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .35);"></span>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle d-none d-dark-mode-block" style="background-color: #212435;"></span>
+                    <img src="assets/img/icons/ai-companies/cohere.svg" class="position-absolute top-0 start-0 w-100 h-100 p-3" alt="Cohere">
+                  </div>
+                </div>
+                <div class="parallax-layer" style="padding-right: 68.2%; padding-left: 21%; transform: translate3d(-25.3px, -9.8px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;" data-depth="0.4">
+                  <div class="position-relative" style="top: 52.9%;">
+                    <div class="ratio ratio-1x1"></div>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-circle d-dark-mode-none" style="box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .4);"></span>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle d-none d-dark-mode-block" style="background-color: #212435;"></span>
+                    <img src="assets/img/icons/ai-companies/deepseek.svg" class="position-absolute top-0 start-0 w-100 h-100 p-3" alt="DeepSeek">
+                  </div>
+                </div>
+                <div class="parallax-layer" style="padding-right: 16%; padding-left: 71.4%; transform: translate3d(-19px, -7.4px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: absolute; display: block; left: 0px; top: 0px;" data-depth="0.3">
+                  <div class="position-relative" style="top: 67.6%;">
+                    <div class="ratio ratio-1x1"></div>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 bg-white rounded-circle d-dark-mode-none" style="box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .35);"></span>
+                    <span class="position-absolute top-0 start-0 w-100 h-100 rounded-circle d-none d-dark-mode-block" style="background-color: #212435;"></span>
+                    <img src="assets/img/icons/ai-companies/stability-ai.svg" class="position-absolute top-0 start-0 w-100 h-100 p-3" alt="Stability AI">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem 2: Контроль доступа -->
+          <div class="row align-items-center justify-content-center justify-content-md-start py-4 py-md-5 my-2 my-sm-3 my-md-0 my-xl-3">
+            <div class="col-11 col-sm-9 col-md-7 col-lg-6 pb-2 pb-sm-3 pb-md-0 mb-4 mb-md-0">
+              <div class="parallax" style="max-width: 636px;">
+                <div class="parallax-layer" data-depth="0">
+                  <div class="ratio" style="--si-aspect-ratio: 89.6%"></div>
+                </div>
+                <div class="parallax-layer" style="padding-right: 24.2%;" data-depth="0.1">
+                  <img src="assets/img/landing/saas-5/use-cases/data-analysis/line-chart-light.png" class="d-dark-mode-none position-relative rounded-3" style="top: 27.5%; max-width: 482px; box-shadow: 0 12px 48px -8px rgba(189, 196, 221, .35);" alt="Total users line chart">
+                  <img src="assets/img/landing/saas-5/use-cases/data-analysis/line-chart-dark.png" class="d-none d-dark-mode-block position-relative rounded-3" style="top: 27.5%; max-width: 482px; box-shadow: 0px 12px 48px -8px rgba(8, 11, 18, .40);" alt="Total users line chart">
+                </div>
+                <div class="parallax-layer" style="padding-left: 45.75%;" data-depth="-0.12">
+                  <img src="assets/img/landing/saas-5/use-cases/data-analysis/bar-chart-light.png" class="d-dark-mode-none position-relative rounded-3" style="max-width: 345px; box-shadow: 0 10.8px 43.2px -7.2px rgba(189, 196, 221, .35);" alt="Traffic bar chart">
+                  <img src="assets/img/landing/saas-5/use-cases/data-analysis/bar-chart-dark.png" class="d-none d-dark-mode-block position-relative rounded-3" style="max-width: 345px; box-shadow: 0px 12px 48px -8px rgba(8, 11, 18, .40);" alt="Traffic bar chart">
+                </div>
+                <div class="parallax-layer" style="padding-right: 7.547%; padding-left: 44.97%;" data-depth="0.3">
+                  <img src="assets/img/landing/saas-5/use-cases/data-analysis/donut-chart-light.png" class="d-dark-mode-none position-relative rounded-3" style="top: 60.75%; max-width: 302px; box-shadow: 0px 0px 48px -4px rgba(189, 196, 221, .35);" alt="Traffic donut chart">
+                  <img src="assets/img/landing/saas-5/use-cases/data-analysis/donut-chart-dark.png" class="d-none d-dark-mode-block position-relative rounded-3" style="top: 60.75%; max-width: 302px; box-shadow: 0px -15px 48px -8px rgba(8, 11, 18, .40);" alt="Traffic donut chart">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 col-xl-4 offset-xl-1 text-center text-md-start">
+              <h3 class="h2 mb-lg-4">Контроль доступа</h3>
+              <p class="fs-lg pb-lg-2 mb-4">AI становится частью инфраструктуры, но отсутствие контроля приводит к рискам перерасхода и невозможности определить ответственных.</p>
+              <ul class="list-unstyled mb-4">
+                <li class="d-flex mb-2">
+                  <span>Один мастер-ключ на всю команду без лимитов</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Нет ограничений по моделям — угроза перерасхода</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Общий ключ обезличивает расходы, оставляя "без владельца"</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Рост интеграций увеличивает "теневые" расходы</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Перерасход обнаруживается постфактум</span>
+                </li>
+              </ul>
+              <a href="#solution" class="btn btn-outline-primary rounded-pill" data-scroll>
+                Узнать решение
+                <i class="bx bx-right-arrow-alt fs-lg ms-2 me-n1"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Problem 3: Безопасность и контроль данных -->
+          <div class="row align-items-center justify-content-center py-4 py-md-5 my-1 my-sm-3 my-md-0 my-xl-3">
+            <div class="col-md-5 col-xl-4 offset-xl-1 order-md-1 text-center text-md-start">
+              <h3 class="h2 mb-lg-4">Безопасность и контроль данных</h3>
+              <p class="fs-lg pb-lg-2 mb-4">В 2025 году через ChatGPT и Gemini утекло в <strong>30 раз больше</strong> конфиденциальных данных, чем годом ранее. Причина — загрузка документов без контроля.</p>
+              <ul class="list-unstyled mb-4">
+                <li class="d-flex mb-2">
+                  <span>Публичные нейросети стали "теневым IT"</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Загрузка в публичные ИИ ПДн = риск нарушения 152-ФЗ</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>ChatGPT/Gemini = трансграничная передача данных</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Выгрузка стратегий, финмоделей нарушает режим КТ (98-ФЗ)</span>
+                </li>
+                <li class="d-flex mb-2">
+                  <span>Отправка кода и ключей повышает риск утечки</span>
+                </li>
+              </ul>
+              <a href="#solution" class="btn btn-outline-primary rounded-pill" data-scroll>
+                Узнать решение
+                <i class="bx bx-right-arrow-alt fs-lg ms-2 me-n1"></i>
+              </a>
+            </div>
+            <div class="col-11 col-sm-9 col-md-7 col-lg-6 offset-lg-1 order-md-2 pb-2 pb-sm-3 pb-md-0 mb-4 mb-md-0">
+              <div class="parallax" style="max-width: 636px;">
+                <div class="parallax-layer" data-depth="0.1">
+                  <img src="assets/img/landing/saas-5/use-cases/chat-bot/window-light.png" class="d-dark-mode-none rounded-3" style="box-shadow: 0 10.2px 41px -6.8px rgba(189, 196, 221, .30);" alt="Chat bot UI window">
+                  <img src="assets/img/landing/saas-5/use-cases/chat-bot/window-dark.png" class="d-none d-dark-mode-block rounded-3" style="box-shadow: 0 8px 30px -4px rgba(8, 11, 18, .35);" alt="Chat bot UI window">
+                </div>
+                <div class="parallax-layer" data-depth="0.15">
+                  <img src="assets/img/landing/saas-5/use-cases/chat-bot/message1-light.png" class="d-dark-mode-none" alt="Message">
+                  <img src="assets/img/landing/saas-5/use-cases/chat-bot/message1-dark.png" class="d-none d-dark-mode-block" alt="Message">
+                </div>
+                <div class="parallax-layer" data-depth="0.25">
+                  <img src="assets/img/landing/saas-5/use-cases/chat-bot/message2-light.png" class="d-dark-mode-none" alt="Message">
+                  <img src="assets/img/landing/saas-5/use-cases/chat-bot/message2-dark.png" class="d-none d-dark-mode-block" alt="Message">
+                </div>
+                <div class="parallax-layer" data-depth="0.35">
+                  <img src="assets/img/landing/saas-5/use-cases/chat-bot/message3-light.png" class="d-dark-mode-none" alt="Message">
+                  <img src="assets/img/landing/saas-5/use-cases/chat-bot/message3-dark.png" class="d-none d-dark-mode-block" alt="Message">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Why now / Pain points (Russia) -->
+      <section class="position-relative overflow-hidden py-5" id="why" style="scroll-margin-top: 90px;">
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-dark-mode-none" style="background: linear-gradient(141deg, rgba(255, 255, 255, .01) 17.3%, #F3F6FF 78.21%);"></span>
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-none d-dark-mode-block" style="background: linear-gradient(141deg, rgba(11, 15, 25, .01) 17.3%, rgba(255, 255, 255, .04) 78.21%);"></div>
+
+        <div class="container position-relative zindex-2 pt-2 pt-sm-3 pt-md-4 pt-lg-5">
+          <h2 class="h1 text-center pb-1 mb-2">Почему сейчас нужен управляемый AI‑контур</h2>
+          <p class="fs-lg text-center pb-lg-2 mb-4">
+            Санкции, требования к персональным данным и рост расходов на LLM делают “прямые” интеграции рискованными для бизнеса.
+          </p>
+
+          <div class="row g-4">
+            <div class="col-md-6 col-xl-3">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="bg-primary bg-opacity-10 rounded-circle lh-1 p-3 d-inline-flex mb-3">
+                    <i class="bx bx-shield-quarter text-primary fs-4 lh-1"></i>
+                  </div>
+                  <h3 class="h5">Внешние ограничения и устойчивость доступа</h3>
+                  <p class="mb-0">
+                    Доступ к международным AI‑решениям может меняться: ограничения по регионам, доступности и условиям.
+                    Нужна архитектура, где переключение LLM/провайдера не ломает приложения.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="bg-warning bg-opacity-10 rounded-circle lh-1 p-3 d-inline-flex mb-3">
+                    <i class="bx bx-lock-alt text-warning fs-4 lh-1"></i>
+                  </div>
+                  <h3 class="h5">ПД и трансграничная передача данных</h3>
+                  <p class="mb-0">
+                    В отраслях с чувствительными данными важно исключать неконтролируемую передачу ПД.
+                    Нужны политики по данным: что можно отправлять, что маскировать или блокировать, и как это фиксируется в аудите.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="bg-success bg-opacity-10 rounded-circle lh-1 p-3 d-inline-flex mb-3">
+                    <i class="bx bx-line-chart text-success fs-4 lh-1"></i>
+                  </div>
+                  <h3 class="h5">Финансовый и операционный контроль</h3>
+                  <p class="mb-0">
+                    При распределённом использовании сложно понять, кто создаёт затраты и какие сценарии “съедают” бюджет.
+                    Нужны разрезы учёта, лимиты, алерты и прозрачная отчётность.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-3">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="bg-danger bg-opacity-10 rounded-circle lh-1 p-3 d-inline-flex mb-3">
+                    <i class="bx bx-cog text-danger fs-4 lh-1"></i>
+                  </div>
+                  <h3 class="h5">Оптимизация расходов и качества</h3>
+                  <p class="mb-0">
+                    Общие ключи и отсутствие правил генерации приводят к перерасходу токенов и нестабильному качеству.
+                    Нужны виртуальные ключи, квоты и централизованные политики генерации в зависимости от LLM и сценария.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Solution -->
+      <section class="bg-dark py-5" id="solution" data-bs-theme="dark" style="scroll-margin-top: 90px;">
+        <div class="container py-sm-3 py-md-4 py-lg-5">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-6">
+              <h2 class="h1 mb-3">AiST JetStream — единый шлюз между вашими системами и LLM</h2>
+              <p class="fs-lg mb-4">
+                AiST JetStream подключается между корпоративными приложениями и LLM‑провайдерами и добавляет то,
+                чего не хватает прямым интеграциям: управляемый доступ, контроль затрат, политики по данным и единый аудит.
+              </p>
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <div class="d-flex">
+                    <i class="bx bx-link-alt fs-3 text-gradient-primary me-3"></i>
+                    <div>
+                      <div class="fw-semibold">Единая точка интеграции</div>
+                      <div class="text-body opacity-75">Один шлюз для всех приложений и команд</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="d-flex">
+                    <i class="bx bx-slider-alt fs-3 text-gradient-primary me-3"></i>
+                    <div>
+                      <div class="fw-semibold">Единые политики</div>
+                      <div class="text-body opacity-75">Доступ, данные, параметры генерации</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="d-flex">
+                    <i class="bx bx-wallet fs-3 text-gradient-primary me-3"></i>
+                    <div>
+                      <div class="fw-semibold">Прозрачные затраты</div>
+                      <div class="text-body opacity-75">Учёт стоимости по запросам и разрезам</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="d-flex">
+                    <i class="bx bx-transfer fs-3 text-gradient-primary me-3"></i>
+                    <div>
+                      <div class="fw-semibold">Гибкость по LLM</div>
+                      <div class="text-body opacity-75">Маршрутизация / переключение по правилам</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-4">
+                <a href="#capabilities" class="btn btn-outline-light rounded-pill" data-scroll>
+                  Посмотреть возможности
+                  <i class="bx bx-right-arrow-alt fs-lg ms-2 me-n1"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card border-0 bg-secondary">
+                <div class="card-body">
+                  <h3 class="h5 text-white mb-3">Принцип работы (логическая схема)</h3>
+                  <div class="d-flex flex-column gap-3">
+                    <div class="d-flex align-items-center justify-content-between bg-dark rounded-3 p-3">
+                      <div class="fw-semibold">Корпоративные приложения</div>
+                      <i class="bx bx-right-arrow-alt fs-3 text-gradient-primary"></i>
+                      <div class="fw-semibold">AiST JetStream</div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between bg-dark rounded-3 p-3">
+                      <div class="fw-semibold">AiST JetStream</div>
+                      <i class="bx bx-right-arrow-alt fs-3 text-gradient-primary"></i>
+                      <div class="fw-semibold">LLM (несколько моделей/провайдеров)</div>
+                    </div>
+                  </div>
+                  <p class="text-body opacity-75 mt-3 mb-0">
+                    Вы подключаете системы один раз и централизованно управляете правилами и экономикой использования AI.
+                  </p>
+                </div>
+              </div>
+              <div class="text-body opacity-75 fs-sm pt-2">
+                Разработчик решения — <b>AiST</b>.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Capabilities -->
+      <section class="position-relative py-5" id="capabilities" style="scroll-margin-top: 90px;">
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-dark-mode-none" style="background: linear-gradient(360deg, #fff 5.39%, #f3f6ff 78.66%);"></span>
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-dark-mode-block" style="background: linear-gradient(360deg, #0b0f19 5.39%, rgba(255, 255, 255, .04) 78.66%);"></span>
+
+        <div class="container position-relative zindex-2 py-2 py-sm-3 py-md-4 py-lg-5">
+          <h2 class="h1 text-center pb-1 mb-2">Возможности AiST JetStream</h2>
+          <p class="fs-lg text-center pb-4 mb-2">
+            Набор модулей для корпоративного внедрения: доступ, экономика, политики генерации и контроль данных.
+          </p>
+
+          <div class="row g-4">
+            <div class="col-md-6 col-xl-4">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="bg-primary bg-opacity-10 rounded-circle lh-1 p-3 d-inline-flex mb-3">
+                    <i class="bx bx-key text-primary fs-4 lh-1"></i>
+                  </div>
+                  <h3 class="h5">Виртуальные ключи и доступ</h3>
+                  <ul class="mb-0">
+                    <li>Виртуальные API‑ключи на сервис / команду / пользователя</li>
+                    <li>RBAC и ограничения по моделям/провайдерам</li>
+                    <li>Квоты, лимиты, авто‑блокировка и уведомления</li>
+                    <li>Ротация ключей и контроль жизненного цикла</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="bg-success bg-opacity-10 rounded-circle lh-1 p-3 d-inline-flex mb-3">
+                    <i class="bx bx-credit-card text-success fs-4 lh-1"></i>
+                  </div>
+                  <h3 class="h5">Аналитика затрат и отчётность</h3>
+                  <ul class="mb-0">
+                    <li>Учёт стоимости каждого запроса (кто / где / какая модель)</li>
+                    <li>Разрезы: сервис, проект, подразделение, пользователь</li>
+                    <li>Бюджеты и алерты по перерасходу</li>
+                    <li>Поиск аномалий и “дорогих” сценариев</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="bg-warning bg-opacity-10 rounded-circle lh-1 p-3 d-inline-flex mb-3">
+                    <i class="bx bx-slideshow text-warning fs-4 lh-1"></i>
+                  </div>
+                  <h3 class="h5">Политики генерации (по LLM/сценарию)</h3>
+                  <ul class="mb-0">
+                    <li>Маршрутизация запросов по моделям: быстрее / дешевле / точнее</li>
+                    <li>Единые system prompts и шаблоны ответов</li>
+                    <li>Стабильное качество и экономия токенов</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-6">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="bg-danger bg-opacity-10 rounded-circle lh-1 p-3 d-inline-flex mb-3">
+                    <i class="bx bx-data text-danger fs-4 lh-1"></i>
+                  </div>
+                  <h3 class="h5">Политики по данным и соответствие</h3>
+                  <ul class="mb-0">
+                    <li>Правила обработки чувствительных данных (в т.ч. ПД): детект / маскирование / блокировка</li>
+                    <li>Контроль того, какие данные можно отправлять в LLM (по сценарию/контуру)</li>
+                    <li>Журналирование и аудит для расследований и контроля</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-6">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="bg-info bg-opacity-10 rounded-circle lh-1 p-3 d-inline-flex mb-3">
+                    <i class="bx bx-cloud-lightning text-info fs-4 lh-1"></i>
+                  </div>
+                  <h3 class="h5">Надёжность и эксплуатация</h3>
+                  <ul class="mb-0">
+                    <li>Раздельные политики для dev / stage / prod</li>
+                    <li>Наблюдаемость: метрики, логи, трассировка (при настройке)</li>
+                    <li>Сценарии переключения LLM при изменении доступности/стоимости (при поставке)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Industries -->
+      <section class="position-relative overflow-hidden py-5" id="industries" style="scroll-margin-top: 90px;">
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-dark-mode-none" style="background: linear-gradient(141deg, rgba(255, 255, 255, .01) 17.3%, #F3F6FF 78.21%);"></span>
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-none d-dark-mode-block" style="background: linear-gradient(141deg, rgba(11, 15, 25, .01) 17.3%, rgba(255, 255, 255, .04) 78.21%);"></div>
+
+        <div class="container position-relative zindex-2 pt-2 pt-sm-3 pt-md-4 pt-lg-5">
+          <h2 class="h1 text-center pb-1 mb-2">Отрасли и сценарии</h2>
+          <p class="fs-lg text-center pb-4 mb-2">
+            AiST JetStream ориентирован на отрасли с высокими требованиями к данным, контролю и масштабу.
+          </p>
+
+          <div class="row g-4">
+            <div class="col-md-6 col-xl-4">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <h3 class="h5 mb-2">Телеком</h3>
+                  <ul class="mb-0">
+                    <li>Контакт‑центр и операторские сценарии</li>
+                    <li>Ассистент инженера: поиск по регламентам и базе знаний</li>
+                    <li>Контроль затрат по продуктам/филиалам</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <h3 class="h5 mb-2">Медицина</h3>
+                  <ul class="mb-0">
+                    <li>Обработка обращений и внутренний поиск по документам</li>
+                    <li>Строгие политики по ПД и доступу</li>
+                    <li>On‑prem для изоляции контура (по требованиям)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <h3 class="h5 mb-2">Ритейл</h3>
+                  <ul class="mb-0">
+                    <li>Поддержка клиентов и помощник сотрудникам</li>
+                    <li>Генерация контента с едиными правилами качества</li>
+                    <li>Оптимизация расходов на больших объёмах запросов</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-6">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <h3 class="h5 mb-2">Логистика</h3>
+                  <ul class="mb-0">
+                    <li>Ассистент оператора/диспетчера: регламенты, статусы, коммуникации</li>
+                    <li>Трассировка запросов и контроль качества</li>
+                    <li>Разделение затрат по филиалам/направлениям</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-6">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <h3 class="h5 mb-2">Финансы</h3>
+                  <ul class="mb-0">
+                    <li>Внутренний ассистент: поиск, черновики документов, поддержка</li>
+                    <li>Аудит, разграничение доступа и отчётность</li>
+                    <li>On‑prem для изолированного контура (по требованиям)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Delivery model (SaaS / On-prem) -->
+      <section class="bg-dark py-5" id="delivery" data-bs-theme="dark" style="scroll-margin-top: 90px;">
+        <div class="container py-sm-3 py-md-4 py-lg-5">
+          <h2 class="h1 text-center mb-2">Поставка: SaaS или On‑prem</h2>
+          <p class="fs-lg text-center text-body mb-5">
+            AiST JetStream поставляется как облачный сервис или разворачивается в инфраструктуре заказчика.
+          </p>
+
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="h4 mb-0">SaaS</h3>
+                    <span class="badge bg-primary bg-opacity-10 text-white">быстрый запуск</span>
+                  </div>
+                  <p class="mb-3">
+                    Подходит, когда важны скорость внедрения и минимальная нагрузка на инфраструктуру.
+                  </p>
+                  <ul class="mb-0">
+                    <li>Быстрое масштабирование и обновления</li>
+                    <li>Единое управление ключами, лимитами и отчётностью</li>
+                    <li>Опции настройки хранения логов и доступа к данным (по политике заказчика)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="h4 mb-0">On‑prem</h3>
+                    <span class="badge bg-warning bg-opacity-10 text-white">контур данных</span>
+                  </div>
+                  <p class="mb-3">
+                    Подходит для повышенных требований к изоляции данных и внутренним стандартам ИБ
+                    (часто — медицина и финансы, а также критичные процессы в телеком/ритейле/логистике).
+                  </p>
+                  <ul class="mb-0">
+                    <li>Размещение в инфраструктуре заказчика</li>
+                    <li>Интеграция с корпоративными системами доступа (по требованиям)</li>
+                    <li>Контроль маршрутизации запросов и политик обработки данных внутри контура</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center pt-4">
+            <a href="#request-demo" class="btn btn-primary bg-gradient-primary border-0 rounded-pill" data-scroll>
+              Обсудить модель поставки
+            </a>
+            <div class="text-body opacity-75 fs-sm pt-2">
+              AiST поможет выбрать вариант внедрения под требования данных, ИБ и регуляторики.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Delivery Comparison -->
+      <section class="position-relative bg-dark pt-lg-4 pt-xl-5" id="comparison" style="background: linear-gradient(90deg, #0b0f19 0%, #172033 51.04%, #0b0f19 100%); scroll-margin-top: 90px;">
+        <div class="jarallax position-absolute top-0 start-0 w-100 h-100" data-jarallax data-speed="0.4">
+          <div class="jarallax-img" style="background-image: url(assets/img/landing/saas-5/pricing-bg-pattern.png);"></div>
+        </div>
+        <div class="container position-relative zindex-2 pt-5" data-bs-theme="dark">
+          <h2 class="h1 text-center pt-2 pt-sm-3 pb-2 mb-2">AiST JetStream: SaaS или On‑Premise</h2>
+          <p class="fs-lg text-center text-body pb-4 pb-md-5 mb-2 mb-md-0 mb-lg-2">Детальное сравнение моделей поставки для принятия решения</p>
+
+          <div class="overflow-x-auto pb-4">
+            <div class="position-relative ms-n4 ms-md-0" style="min-width: 800px;">
+
+              <!-- Background highlight for center column -->
+              <div class="position-absolute top-0 start-50 translate-middle-x h-100 bg-secondary rounded-3 rounded-bottom-0 d-none d-lg-block" style="width: 342px;"></div>
+              <div class="position-absolute top-0 start-50 translate-middle-x h-100 bg-secondary rounded-3 rounded-bottom-0 d-lg-none" style="width: 300px;"></div>
+
+              <!-- Header Row -->
+              <div class="row row-cols-3 align-items-center position-relative zindex-2 g-0">
+                <div class="col">&nbsp;</div>
+                <div class="col py-2 py-md-3">
+                  <div class="text-center py-4 mx-auto" style="width: 264px;">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle p-3 mb-3">
+                      <i class="bx bx-cloud text-gradient-primary fs-3"></i>
+                    </div>
+                    <h3 class="h4 mb-2">SaaS</h3>
+                    <p class="text-body fs-sm mb-0">Облачная модель</p>
+                  </div>
+                </div>
+                <div class="col text-center pe-lg-5">
+                  <div class="mx-auto" style="width: 264px;">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10 rounded-circle p-3 mb-3">
+                      <i class="bx bx-server text-warning fs-3"></i>
+                    </div>
+                    <h3 class="h4 pt-3 pt-md-0 mb-2">On‑Premise</h3>
+                    <p class="text-body fs-sm mb-0">Собственная инфраструктура</p>
+                  </div>
+                </div>
+                <div class="position-relative w-100 opacity-50">
+                  <span class="position-absolute top-0 start-0 w-100 h-1" style="background: linear-gradient(270deg, #0f1522 0%, rgba(11, 15, 25, 0) 54.17%, #0f1522 98.44%);"></span>
+                  <span class="d-block w-100 h-1 bg-gradient-primary"></span>
+                </div>
+              </div>
+
+              <!-- Row 1: Время развертывания -->
+              <div class="row row-cols-3 align-items-center position-relative zindex-2 g-0">
+                <div class="col py-3 py-md-4 ps-lg-5">
+                  <div class="text-white opacity-80 fs-lg py-1 px-4 mx-auto" style="width: 208px;">
+                    <i class="bx bx-time-five text-gradient-primary me-2"></i>
+                    Время развертывания
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">От 1 дня</div>
+                    <div class="text-body fs-xs">Готов к работе сразу после регистрации</div>
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4 pe-lg-5">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">2-4 недели</div>
+                    <div class="text-body fs-xs">Установка и настройка инфраструктуры</div>
+                  </div>
+                </div>
+                <div class="position-relative w-100 opacity-50">
+                  <span class="position-absolute top-0 start-0 w-100 h-1" style="background: linear-gradient(270deg, #0f1522 0%, rgba(11, 15, 25, 0) 54.17%, #0f1522 98.44%);"></span>
+                  <span class="d-block w-100 h-1 bg-gradient-primary"></span>
+                </div>
+              </div>
+
+              <!-- Row 2: Контроль данных -->
+              <div class="row row-cols-3 align-items-center position-relative zindex-2 g-0">
+                <div class="col py-3 py-md-4 ps-lg-5">
+                  <div class="text-white opacity-80 fs-lg py-1 px-4 mx-auto" style="width: 208px;">
+                    <i class="bx bx-shield-quarter text-gradient-primary me-2"></i>
+                    Контроль данных
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">Облачное хранение</div>
+                    <div class="text-body fs-xs">Логи в облаке, выбор региона, соответствие GDPR/152-ФЗ</div>
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4 pe-lg-5">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">Полный контроль</div>
+                    <div class="text-body fs-xs">Данные внутри контура, соответствие любым политикам</div>
+                  </div>
+                </div>
+                <div class="position-relative w-100 opacity-50">
+                  <span class="position-absolute top-0 start-0 w-100 h-1" style="background: linear-gradient(270deg, #0f1522 0%, rgba(11, 15, 25, 0) 54.17%, #0f1522 98.44%);"></span>
+                  <span class="d-block w-100 h-1 bg-gradient-primary"></span>
+                </div>
+              </div>
+
+              <!-- Row 3: Стоимость владения -->
+              <div class="row row-cols-3 align-items-center position-relative zindex-2 g-0">
+                <div class="col py-3 py-md-4 ps-lg-5">
+                  <div class="text-white opacity-80 fs-lg py-1 px-4 mx-auto" style="width: 208px;">
+                    <i class="bx bx-wallet text-gradient-primary me-2"></i>
+                    Стоимость владения (TCO)
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">Подписка</div>
+                    <div class="text-body fs-xs">Opex модель, без инвестиций в инфраструктуру</div>
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4 pe-lg-5">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">Инфраструктура + команда</div>
+                    <div class="text-body fs-xs">Capex/Opex, требуется команда поддержки</div>
+                  </div>
+                </div>
+                <div class="position-relative w-100 opacity-50">
+                  <span class="position-absolute top-0 start-0 w-100 h-1" style="background: linear-gradient(270deg, #0f1522 0%, rgba(11, 15, 25, 0) 54.17%, #0f1522 98.44%);"></span>
+                  <span class="d-block w-100 h-1 bg-gradient-primary"></span>
+                </div>
+              </div>
+
+              <!-- Row 4: Масштабирование -->
+              <div class="row row-cols-3 align-items-center position-relative zindex-2 g-0">
+                <div class="col py-3 py-md-4 ps-lg-5">
+                  <div class="text-white opacity-80 fs-lg py-1 px-4 mx-auto" style="width: 208px;">
+                    <i class="bx bx-line-chart text-gradient-primary me-2"></i>
+                    Масштабирование
+                  </div>
+                </div>
+                <div class="col py-4">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">Автоматическое</div>
+                    <div class="text-body fs-xs">Эластичное масштабирование под нагрузку</div>
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4 pe-lg-5">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">Ручное планирование</div>
+                    <div class="text-body fs-xs">Требуется закупка и настройка ресурсов</div>
+                  </div>
+                </div>
+                <div class="position-relative w-100 opacity-50">
+                  <span class="position-absolute top-0 start-0 w-100 h-1" style="background: linear-gradient(270deg, #0f1522 0%, rgba(11, 15, 25, 0) 54.17%, #0f1522 98.44%);"></span>
+                  <span class="d-block w-100 h-1 bg-gradient-primary"></span>
+                </div>
+              </div>
+
+              <!-- Row 5: Обновления и поддержка -->
+              <div class="row row-cols-3 align-items-center position-relative zindex-2 g-0">
+                <div class="col py-3 py-md-4 ps-lg-5">
+                  <div class="text-white opacity-80 fs-lg py-1 px-4 mx-auto" style="width: 208px;">
+                    <i class="bx bx-wrench text-gradient-primary me-2"></i>
+                    Обновления и поддержка
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">Автоматические</div>
+                    <div class="text-body fs-xs">Обновления без простоев, техподдержка 24/7</div>
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4 pe-lg-5">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">Контролируемые</div>
+                    <div class="text-body fs-xs">Обновления по графику, требуется администрирование</div>
+                  </div>
+                </div>
+                <div class="position-relative w-100 opacity-50">
+                  <span class="position-absolute top-0 start-0 w-100 h-1" style="background: linear-gradient(270deg, #0f1522 0%, rgba(11, 15, 25, 0) 54.17%, #0f1522 98.44%);"></span>
+                  <span class="d-block w-100 h-1 bg-gradient-primary"></span>
+                </div>
+              </div>
+
+              <!-- Row 6: Интеграция -->
+              <div class="row row-cols-3 align-items-center position-relative zindex-2 g-0">
+                <div class="col py-3 py-md-4 ps-lg-5">
+                  <div class="text-white opacity-80 fs-lg py-1 px-4 mx-auto" style="width: 208px;">
+                    <i class="bx bx-plug text-gradient-primary me-2"></i>
+                    Интеграция с системами
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">API-интеграция</div>
+                    <div class="text-body fs-xs">Стандартные протоколы: OAuth, SSO, webhooks</div>
+                  </div>
+                </div>
+                <div class="col py-3 py-md-4 pe-lg-5">
+                  <div class="text-center py-1 px-4 mx-auto" style="width: 264px;">
+                    <div class="text-white fs-lg fw-semibold">Глубокая интеграция</div>
+                    <div class="text-body fs-xs">AD, LDAP, кастомные решения, legacy-системы</div>
+                  </div>
+                </div>
+                <div class="position-relative w-100 opacity-50">
+                  <span class="position-absolute top-0 start-0 w-100 h-1" style="background: linear-gradient(270deg, #0f1522 0%, rgba(11, 15, 25, 0) 54.17%, #0f1522 98.44%);"></span>
+                  <span class="d-block w-100 h-1 bg-gradient-primary"></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CTA Section -->
+          <div class="container position-relative zindex-2 pt-4 pb-5">
+            <div class="text-center">
+              <p class="text-white opacity-70 fs-lg mb-4">
+                Не уверены, какой вариант подходит вашей компании? Мы поможем разобраться.
+              </p>
+              <a href="#request-demo" class="btn btn-lg btn-primary bg-gradient-primary border-0 rounded-pill" data-scroll>
+                Обсудить модель поставки
+              </a>
+              <div class="text-body opacity-75 fs-sm pt-3">
+                Консультация с учетом требований к данным, ИБ и регуляторике
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-none d-xl-block" style="height: 300px;"></div>
+        <div class="d-none d-md-block d-xl-none" style="height: 260px;"></div>
+        <div class="d-md-none" style="height: 230px;"></div>
+
+        <div class="d-flex position-absolute bottom-0 start-0 w-100 overflow-hidden mb-n1" style="color: var(--si-body-bg);">
+          <div class="position-relative start-50 translate-middle-x flex-shrink-0" style="width: 3774px;">
+            <svg width="3774" height="201" viewBox="0 0 3774 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 200.003C0 200.003 1137.52 0.188224 1873.5 0.000134392C2614.84 -0.189325 3774 200.003 3774 200.003H0Z" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Integration -->
+      <section class="position-relative py-5" id="integration" style="scroll-margin-top: 90px;">
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-dark-mode-none" style="background: linear-gradient(360deg, #fff 5.39%, #f3f6ff 78.66%);"></span>
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-dark-mode-block" style="background: linear-gradient(360deg, #0b0f19 5.39%, rgba(255, 255, 255, .04) 78.66%);"></span>
+
+        <div class="container position-relative zindex-2 py-2 py-sm-3 py-md-4 py-lg-5">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-5">
+              <h2 class="h1 mb-3">Подключение через API без переработки приложений</h2>
+              <p class="fs-lg mb-4">
+                AiST JetStream поддерживает OpenAI‑совместимый формат запросов: вы меняете endpoint и используете виртуальный ключ,
+                а политики и аналитика подключаются централизованно.
+              </p>
+
+              <ol class="fs-lg mb-0">
+                <li>Создайте проект и выпустите виртуальные ключи</li>
+                <li>Настройте лимиты, модели и политики генерации</li>
+                <li>Замените endpoint в приложении на AiST JetStream</li>
+                <li>Получайте логи, стоимость, алерты и отчётность</li>
+              </ol>
+
+              <div class="text-body opacity-75 fs-sm pt-3">
+                Поддерживаются сценарии dev/stage/prod и разделение по средам.
+              </div>
+            </div>
+
+            <div class="col-lg-7">
+              <div class="card border-0 bg-secondary">
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h3 class="h5 mb-0">Пример интеграции (OpenAI‑совместимо)</h3>
+                    <span class="badge bg-primary bg-opacity-10 text-primary">пример</span>
+                  </div>
+
+<pre class="mb-0"><code>// Было: прямой вызов провайдера
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: "https://api.openai.com/v1"
+});
+
+// Стало: вызов через AiST JetStream
+const client = new OpenAI({
+  apiKey: process.env.AIST_JETSTREAM_VIRTUAL_KEY,
+  baseURL: "https://gateway.aist.example/v1"
+});
+
+// Дальше код приложения не меняется
+const res = await client.chat.completions.create({
+  model: "gpt-4o-mini",
+  messages: [{ role: "user", content: "Сформируй ответ клиенту по обращению" }]
+});</code></pre>
+
+                </div>
+              </div>
+
+              <div class="alert alert-secondary border-0 mt-3 mb-0">
+                <div class="d-flex">
+                  <i class="bx bx-info-circle fs-4 me-2"></i>
+                  <div>
+                    В продакшене endpoint и политики задаются согласно вашему контуру (SaaS/On‑prem) и требованиям ИБ.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section class="position-relative overflow-hidden py-5" id="how" style="scroll-margin-top: 90px;">
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-dark-mode-none" style="background: linear-gradient(141deg, rgba(255, 255, 255, .01) 17.3%, #F3F6FF 78.21%);"></span>
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-none d-dark-mode-block" style="background: linear-gradient(141deg, rgba(11, 15, 25, .01) 17.3%, rgba(255, 255, 255, .04) 78.21%);"></div>
+
+        <div class="container position-relative zindex-2 pt-2 pt-sm-3 pt-md-4 pt-lg-5">
+          <h2 class="h1 text-center mb-2">Как это работает</h2>
+          <p class="fs-lg text-center mb-5">
+            Контроль применяется до отправки запроса в LLM, а стоимость и аудит фиксируются автоматически.
+          </p>
+
+          <div class="row g-4">
+            <div class="col-md-6 col-xl-3">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="fw-semibold mb-2">1) Запрос из приложения</div>
+                  <div class="text-body">
+                    Приложение отправляет запрос в JetStream с виртуальным ключом.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="fw-semibold mb-2">2) Политики и контроль</div>
+                  <div class="text-body">
+                    JetStream проверяет доступ, лимиты, параметры генерации и правила по данным.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="fw-semibold mb-2">3) Выбор LLM по правилам</div>
+                  <div class="text-body">
+                    Запрос направляется в выбранную LLM/провайдера в соответствии с политиками маршрутизации.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <div class="card border-0 bg-secondary h-100">
+                <div class="card-body">
+                  <div class="fw-semibold mb-2">4) Ответ + аналитика</div>
+                  <div class="text-body">
+                    Возвращается ответ, фиксируются стоимость, метрики и аудит для отчётности и алертов.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Video / Architecture -->
+      <section class="position-relative py-5">
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-dark-mode-none" style="background: linear-gradient(360deg, #fff 5.39%, #f3f6ff 78.66%);"></span>
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-dark-mode-block" style="background: linear-gradient(360deg, #0b0f19 5.39%, rgba(255, 255, 255, .04) 78.66%);"></span>
+        <div class="container position-relative zindex-2 py-2 py-sm-3 py-sm-4 py-md-5">
+          <div class="row align-items-center py-lg-2 py-xl-3 my-xl-1 my-xxl-3">
+            <div class="col-md-5 col-xl-4">
+              <h2 class="h1 pb-2 pb-sm-3 mb-md-0">Архитектура <span class="text-gradient-primary">AiST JetStream</span></h2>
+            </div>
+            <div class="col-md-7 offset-xl-1">
+              <div class="position-relative">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center zindex-5">
+                  <a href="https://www.youtube.com/watch?v=ADpOLD2z1Ns" class="btn btn-video btn-icon btn-xl stretched-link bg-white" data-bs-toggle="video" aria-label="Play video">
+                    <i class="bx bx-play"></i>
+                  </a>
+                </div>
+                <img src="assets/img/landing/saas-5/video-cover-light.jpg" class="d-dark-mode-none rounded-3" alt="Video cover">
+                <img src="assets/img/landing/saas-5/video-cover-dark.png" class="d-none d-dark-mode-block rounded-3" alt="Video cover">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Security -->
+      <section class="bg-dark py-5" id="security" data-bs-theme="dark" style="scroll-margin-top: 90px;">
+        <div class="container py-sm-3 py-md-4 py-lg-5">
+          <div class="row align-items-start g-4">
+            <div class="col-lg-6">
+              <h2 class="h1 mb-3">Безопасность и соответствие требованиям</h2>
+              <p class="fs-lg text-body mb-4">
+                AiST JetStream проектируется для корпоративных внедрений: разграничение доступа, аудит и управляемые политики обработки данных.
+              </p>
+              <ul class="fs-lg mb-0">
+                <li>RBAC, управление ключами и их ротация</li>
+                <li>Аудит действий и журналирование запросов по корпоративным правилам</li>
+                <li>Политики обработки чувствительных данных, включая персональные данные</li>
+                <li>Настройки хранения и доступа к содержимому запросов/ответов (по политике заказчика)</li>
+                <li>On‑prem поставка для изоляции данных и соответствия внутренним стандартам</li>
+              </ul>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card border-0 bg-secondary">
+                <div class="card-body">
+                  <h3 class="h5 mb-3">Для security review</h3>
+                  <p class="mb-4">
+                    Подготовим материалы и проведём техническую сессию с ИБ/архитекторами: контур данных,
+                    хранение логов, интеграции, модели поставки.
+                  </p>
+                  <a href="#request-demo" class="btn btn-outline-light rounded-pill" data-scroll>
+                    Запросить материалы / сессию
+                    <i class="bx bx-right-arrow-alt fs-lg ms-2 me-n1"></i>
+                  </a>
+                  <div class="text-body opacity-75 fs-sm pt-3 mb-0">
+                    NDA — по запросу.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="position-relative py-5" id="faq" style="scroll-margin-top: 90px;">
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-dark-mode-none" style="background: linear-gradient(360deg, #fff 5.39%, #f3f6ff 78.66%);"></span>
+        <span class="position-absolute top-0 start-0 w-100 h-100 d-none d-dark-mode-block" style="background: linear-gradient(360deg, #0b0f19 5.39%, rgba(255, 255, 255, .04) 78.66%);"></span>
+
+        <div class="container position-relative zindex-2 py-2 py-sm-3 py-md-4 py-lg-5">
+          <h2 class="h1 text-center mb-2">FAQ</h2>
+          <p class="fs-lg text-center mb-5">
+            Ответы на типовые вопросы внедрения в телеком, медицине, ритейле, логистике и финансах.
+          </p>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
+              <div class="accordion" id="faqAccordion">
+
+                <div class="accordion-item border-0 bg-secondary mb-3 rounded-3">
+                  <h3 class="accordion-header" id="faq1">
+                    <button class="accordion-button collapsed bg-secondary rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="false" aria-controls="faqCollapse1">
+                      Сколько занимает подключение?
+                    </button>
+                  </h3>
+                  <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                      Базовая интеграция выполняется через OpenAI‑совместимый API. Сроки зависят от требований к политикам и выбранной модели поставки (SaaS/On‑prem).
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item border-0 bg-secondary mb-3 rounded-3">
+                  <h3 class="accordion-header" id="faq2">
+                    <button class="accordion-button collapsed bg-secondary rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                      Можно ли поставить решение On‑prem?
+                    </button>
+                  </h3>
+                  <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                      Да. AiST JetStream может разворачиваться в инфраструктуре заказчика для сценариев с повышенными требованиями к данным и ИБ.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item border-0 bg-secondary mb-3 rounded-3">
+                  <h3 class="accordion-header" id="faq3">
+                    <button class="accordion-button collapsed bg-secondary rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                      Как контролируется передача персональных данных?
+                    </button>
+                  </h3>
+                  <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                      Через политики обработки данных: правила детекта/маскирования/блокировки и аудит применения политик. Настройка зависит от вашего регуляторного контура и процессов.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item border-0 bg-secondary mb-3 rounded-3">
+                  <h3 class="accordion-header" id="faq4">
+                    <button class="accordion-button collapsed bg-secondary rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                      Как считаются расходы и как ограничить перерасход?
+                    </button>
+                  </h3>
+                  <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                      Стоимость фиксируется по каждому запросу с разрезами по сервисам/проектам/подразделениям/пользователям и моделям. Доступны бюджеты, квоты, лимиты и алерты.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item border-0 bg-secondary rounded-3">
+                  <h3 class="accordion-header" id="faq5">
+                    <button class="accordion-button collapsed bg-secondary rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
+                      Можно ли задавать разные настройки генерации для разных LLM/сценариев?
+                    </button>
+                  </h3>
+                  <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                      Да. Политики генерации позволяют централизованно управлять выбором модели и параметрами ответа (например, max_tokens/temperature), а также шаблонами system prompt для разных сценариев.
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="bg-dark py-5" id="request-demo" data-bs-theme="dark" style="scroll-margin-top: 90px;">
+        <div class="container py-sm-3 py-md-4 py-lg-5">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+              <h2 class="h1 mb-3">Обсудим внедрение AiST JetStream под ваш контур данных</h2>
+              <p class="fs-lg text-body mb-0">
+                Покажем демо, соберём требования (SaaS или On‑prem), предложим политики доступа и оптимизации расходов для ваших сценариев.
+                Разработчик решения — <b>AiST</b>.
+              </p>
+            </div>
+            <div class="col-lg-5">
+              <div class="card border-0 bg-secondary">
+                <div class="card-body">
+                  <h3 class="h5 mb-3">Запросить демо</h3>
+
+                  <!-- Простая форма-заглушка: подключение к обработчику на стороне сайта -->
+                  <form action="#" method="post">
+                    <div class="mb-3">
+                      <label class="form-label" for="name">Имя</label>
+                      <input class="form-control" type="text" id="name" name="name" placeholder="Иван Иванов" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="company">Компания</label>
+                      <input class="form-control" type="text" id="company" name="company" placeholder="Название компании" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="email">Email</label>
+                      <input class="form-control" type="email" id="email" name="email" placeholder="name@company.ru" required>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label" for="deliveryModel">Интересующая поставка</label>
+                      <select class="form-select" id="deliveryModel" name="deliveryModel">
+                        <option value="SaaS">SaaS</option>
+                        <option value="On-prem">On‑prem</option>
+                        <option value="Both">Рассматриваем оба варианта</option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary bg-gradient-primary border-0 rounded-pill w-100">
+                      Отправить заявку
+                    </button>
+                    <div class="text-body opacity-75 fs-sm pt-3 mb-0">
+                      Ответим в течение 1 рабочего дня. NDA — по запросу.
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Vendor Scripts -->
+    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/vendor/shufflejs/dist/shuffle.min.js"></script>
+    <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
+    <script src="assets/vendor/parallax-js/dist/parallax.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/lightgallery/lightgallery.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/video/lg-video.min.js"></script>
+
+    <!-- Main Theme Script -->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>
